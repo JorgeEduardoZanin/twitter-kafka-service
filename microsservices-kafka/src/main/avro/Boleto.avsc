@@ -1,0 +1,10 @@
+{
+  "namespace": "project.spring.avro",
+  "type":      "record",
+  "name":      "Boleto",
+  "fields": [
+    { "name": "codigoBarras",   "type": "string" },
+    { "name": "status",         "type": "string" }
+    
+  ]
+}
