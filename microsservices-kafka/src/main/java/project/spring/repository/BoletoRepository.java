@@ -9,5 +9,5 @@ import project.spring.entities.Boleto;
 
 @Repository
 public interface BoletoRepository extends JpaRepository<Boleto, Long> {
-
+	public Boleto findByCodigoBarras(String codigoBarras);
 }

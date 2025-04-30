@@ -46,12 +46,10 @@ public class Boleto {
 	
 	public Boleto() {}
 
-	public Boleto(String codigoBarras, StatusBoleto statusBoleto, LocalDateTime dataCriacao, LocalDateTime dataAtualizacao, Usuario usuario) {
+	public Boleto(String codigoBarras, StatusBoleto statusBoleto,  LocalDateTime dataAtualizacao) {
 		this.codigoBarras = codigoBarras;
 		this.statusBoleto = statusBoleto;
-		this.dataCriacao = dataCriacao;
 		this.dataAtualizacao = dataAtualizacao;
-		this.usuario = usuario;
 	}
 
 	public Long getId() {
