@@ -96,6 +96,21 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.asynchttpclient</groupId>
+			<artifactId>async-http-client</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+
+		
+				<!-- https://mvnrepository.com/artifact/br.com.intersistemas/JAsaas -->
+		<dependency>
+		    <groupId>br.com.intersistemas</groupId>
+		    <artifactId>JAsaas</artifactId>
+		    <version>3.8.6</version>
+		</dependency>
+		
 	</dependencies>
 	<repositories>
 		  <repository>
