@@ -1,10 +1,12 @@
 package project.spring.entities;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,7 +16,7 @@ public class Pagamento {
 	@Id
 	private String id;
 	
-	private UUID customer;
+	private String customer;
 	
 	private LocalDate dueDate;
 	private Long value;
@@ -22,13 +24,17 @@ public class Pagamento {
 	private String status;
 	private String pixQrCode;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_pagamento_id")
+	private Usuario usuario;
+	
 	public Pagamento() {
 
 	}
 
 	
 
-	public Pagamento(UUID customer, LocalDate dueDate, Long value, String billingType, String status, String pixQrCode) {
+	public Pagamento(String customer, LocalDate dueDate, Long value, String billingType, String status, String pixQrCode) {
 		this.customer = customer;
 		this.dueDate = dueDate;
 		this.value = value;
@@ -47,11 +53,11 @@ public class Pagamento {
 		this.id = id;
 	}
 
-	public UUID getCustomer() {
+	public String getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(UUID customer) {
+	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
 

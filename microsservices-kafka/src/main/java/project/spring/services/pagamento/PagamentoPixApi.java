@@ -17,8 +17,8 @@ import project.spring.dto.response.PagamentoPixResponse;
 @Component
 public class PagamentoPixApi {
 	
-	@Value("API_KEY")
-	 private static String API_KEY;
+	@Value("${asaas.api-key}")
+	 private String API_KEY;
 	
 	public String createKeyPix() throws IOException{
 		
@@ -58,8 +58,7 @@ public class PagamentoPixApi {
 			  .toCompletableFuture()
 			  .join();
 			
-			ObjectMapper mapper = new ObjectMapper();
-			return mapper.readValue(resp.getResponseBody(), PagamentoPixResponse.class);
+			return new ObjectMapper().readValue(resp.getResponseBody(), PagamentoPixResponse.class);
 			
 		}finally{
 			client.close();

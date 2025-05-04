@@ -1,4 +1,4 @@
-package project.spring.services.kafka;
+/*package project.spring.services.kafka;
 
 
 import org.slf4j.Logger;
@@ -34,3 +34,4 @@ public class BoletoConsumer{
 	}
 	
 
+*/

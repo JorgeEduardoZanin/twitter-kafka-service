@@ -43,7 +43,7 @@ public class Boleto {
 	@JsonBackReference
 	private Usuario usuario;
 	
-	 @OneToOne(mappedBy = "boleto", fetch = FetchType.EAGER)
+	@OneToOne(mappedBy = "boleto", fetch = FetchType.EAGER)
 	private Notificacao notificacao;
 	
 	private LocalDateTime dataCriacao;

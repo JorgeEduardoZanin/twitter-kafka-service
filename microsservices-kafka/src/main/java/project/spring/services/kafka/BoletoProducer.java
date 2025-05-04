@@ -1,3 +1,4 @@
+/*
 package project.spring.services.kafka;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,3 +23,4 @@ public class BoletoProducer {
 	}
 	
 }
+*/

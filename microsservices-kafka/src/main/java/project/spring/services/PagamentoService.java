@@ -19,11 +19,11 @@ public class PagamentoService {
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
 	
-	private PagamentoPixResponse response;
 	
 	public PagamentoPixResponse createPagamentoPix(PagamentoPixRequest request) throws IOException {
 		var pagamento = pagamentoPix.createPayment(request);
-		pagamentoRepository.save(response.toEntity(pagamento));
+		System.out.println(pagamento);
+		pagamentoRepository.save(pagamento.toEntity());
 		return pagamento;
 		
 	}
