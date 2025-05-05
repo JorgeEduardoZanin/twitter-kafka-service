@@ -2,6 +2,7 @@ package project.spring.entities;
 
 import java.time.LocalDate;
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -20,30 +21,25 @@ public class Pagamento {
 	
 	private LocalDate dueDate;
 	private Long value;
+	
 	private String billingType;
 	private String status;
-	private String pixQrCode;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_pagamento_id")
-	private Usuario usuario;
+	private UsuarioPagamento usuario;
 	
 	public Pagamento() {
 
 	}
 
-	
-
-	public Pagamento(String customer, LocalDate dueDate, Long value, String billingType, String status, String pixQrCode) {
+	public Pagamento(String customer, LocalDate dueDate, Long value, String billingType, String status) {
 		this.customer = customer;
 		this.dueDate = dueDate;
 		this.value = value;
 		this.billingType = billingType;
 		this.status = status;
-		this.pixQrCode = pixQrCode;
 	}
-
-
 
 	public String getId() {
 		return id;
@@ -84,32 +80,12 @@ public class Pagamento {
 	public void setBillingType(String billingType) {
 		this.billingType = billingType;
 	}
-
-
-
+	
 	public String getStatus() {
 		return status;
 	}
 
-
-
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-
-
-	public String getPixQrCode() {
-		return pixQrCode;
-	}
-
-
-
-	public void setPixQrCode(String pixQrCode) {
-		this.pixQrCode = pixQrCode;
-	}
-	
-	
-	
-	
+	}	
 }
