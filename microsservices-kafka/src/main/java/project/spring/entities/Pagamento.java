@@ -33,13 +33,12 @@ public class Pagamento {
 
 	}
 
-	public Pagamento(String customer, LocalDate dueDate, Long value, String billingType, String status, String chavePix) {
+	public Pagamento(String customer, LocalDate dueDate, Long value, String billingType, String status) {
 		this.customer = customer;
 		this.dueDate = dueDate;
 		this.value = value;
 		this.billingType = billingType;
 		this.status = status;
-		this.chavePix = chavePix;
 	}
 
 	public String getId() {

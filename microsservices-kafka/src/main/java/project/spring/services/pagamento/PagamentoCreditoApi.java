@@ -1,6 +1,8 @@
 package project.spring.services.pagamento;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
@@ -12,23 +14,32 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import project.spring.dto.request.PagamentoCreditoRequest;
+import project.spring.dto.request.TitularCartaoCreditoRequest;
 import project.spring.dto.response.PagamentoCreditoResponse;
 
 
 @Component
-public class PagamentoCreditoApi {
+public class PagamentoCreditoApi{
 
 	@Value("${asaas.api-key}")
-	 private String API_KEY;
+	private String API_KEY;
 	
-	public PagamentoCreditoResponse createPagamento(PagamentoCreditoResponse response) throws IOException {
+	public PagamentoCreditoResponse createPagamento(PagamentoCreditoRequest requestPagamento, TitularCartaoCreditoRequest titularRequest, String customer) throws IOException {
 		AsyncHttpClient client = new DefaultAsyncHttpClient();
 		try {
+			String date = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			
 			Response resp = client.prepare("POST", "https://api-sandbox.asaas.com/v3/payments/")
 			  .setHeader("accept", "application/json")
 			  .setHeader("content-type", "application/json")
 			  .setHeader("access_token", API_KEY)
-			  .setBody("{\"billingType\":\"CREDIT_CARD\",\"creditCard\":{\"holderName\":\"John Doe\",\"number\":\"1234567890123456\",\"expiryMonth\":\"5\",\"expiryYear\":\"2025\",\"ccv\":\"123\"},\"creditCardHolderInfo\":{\"name\":\"John Doe\",\"email\":\"john.doe@asaas.com\",\"cpfCnpj\":\"247.213.100-30\",\"postalCode\":\"85010300\",\"addressNumber\":\"123\",\"phone\":\"321312321321\"},\"dueDate\":\"2027-06-10\",\"value\":129.9,\"customer\":\"cus_000006682352\"}")
+			  .setBody("{\"billingType\":\"CREDIT_CARD\",\"creditCard\":{\"holderName\":\""+requestPagamento.nomeCartao()+"\","
+			  		+ "\"number\":\""+requestPagamento.numeroCartao()+"\",\"expiryMonth\":\""+requestPagamento.mesExpiracao()+"\","
+			  		+ "\"expiryYear\":\""+requestPagamento.anoExpiracao()+"\",\"ccv\":\""+requestPagamento.ccv()+"\"},"
+			  		+ "\"creditCardHolderInfo\":{\"name\":\""+titularRequest.nomeTitularCartao()+"\",\"email\":\""+titularRequest.email()+"\","
+			  		+ "\"cpfCnpj\":\""+titularRequest.cpf_cnpj()+"\",\"postalCode\":\""+titularRequest.codigoPostal()+"\",\"addressNumber\":\""+titularRequest.numeroEndereco()+"\","
+			  		+ "\"phone\":\""+titularRequest.telefone()+"\"},\"dueDate\":\""+date+"\",\"value\":"+requestPagamento.value()+",\"customer\":\""+customer+"\"}")
 			  .execute()
 			  .toCompletableFuture()
 			  .join();

@@ -17,8 +17,9 @@ public record PagamentoPixResponse(String id, String customer,
 	
 	public Pagamento toEntity() {
 		
-		Pagamento pagamento = new Pagamento(this.customer, this.dueDate, this.value, this.billingType, this.status, this.chavePix);
-		pagamento.setId(id);
+		Pagamento pagamento = new Pagamento(this.customer, this.dueDate, this.value, this.billingType, this.status);
+		pagamento.setChavePix(this.chavePix);
+		pagamento.setId(this.id);
 		return pagamento;
 	}
 	
