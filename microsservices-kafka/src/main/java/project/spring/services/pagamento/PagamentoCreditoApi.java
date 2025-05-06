@@ -27,7 +27,7 @@ public class PagamentoCreditoApi {
 			Response resp = client.prepare("POST", "https://api-sandbox.asaas.com/v3/payments/")
 			  .setHeader("accept", "application/json")
 			  .setHeader("content-type", "application/json")
-			  .setHeader("access_token", "$aact_hmlg_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjA4MWZhY2ZiLWU5ODgtNDkzZC1hY2I2LTVjMGE2YzllYTcxZjo6JGFhY2hfOWZmNzg4NzUtZDkyZi00NzRiLTkzN2ItNzVmYWU2MTM2NWMw")
+			  .setHeader("access_token", API_KEY)
 			  .setBody("{\"billingType\":\"CREDIT_CARD\",\"creditCard\":{\"holderName\":\"John Doe\",\"number\":\"1234567890123456\",\"expiryMonth\":\"5\",\"expiryYear\":\"2025\",\"ccv\":\"123\"},\"creditCardHolderInfo\":{\"name\":\"John Doe\",\"email\":\"john.doe@asaas.com\",\"cpfCnpj\":\"247.213.100-30\",\"postalCode\":\"85010300\",\"addressNumber\":\"123\",\"phone\":\"321312321321\"},\"dueDate\":\"2027-06-10\",\"value\":129.9,\"customer\":\"cus_000006682352\"}")
 			  .execute()
 			  .toCompletableFuture()

@@ -21,7 +21,7 @@ public class Pagamento {
 	
 	private LocalDate dueDate;
 	private Long value;
-	
+	private String chavePix;
 	private String billingType;
 	private String status;
 	
@@ -33,12 +33,13 @@ public class Pagamento {
 
 	}
 
-	public Pagamento(String customer, LocalDate dueDate, Long value, String billingType, String status) {
+	public Pagamento(String customer, LocalDate dueDate, Long value, String billingType, String status, String chavePix) {
 		this.customer = customer;
 		this.dueDate = dueDate;
 		this.value = value;
 		this.billingType = billingType;
 		this.status = status;
+		this.chavePix = chavePix;
 	}
 
 	public String getId() {
@@ -87,5 +88,13 @@ public class Pagamento {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getChavePix() {
+		return chavePix;
+	}
+
+	public void setChavePix(String chavePix) {
+		this.chavePix = chavePix;
 	}	
 }

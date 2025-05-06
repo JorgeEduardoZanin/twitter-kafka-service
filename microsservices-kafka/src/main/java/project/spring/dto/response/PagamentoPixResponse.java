@@ -3,23 +3,23 @@ package project.spring.dto.response;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import project.spring.entities.Pagamento;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public record PagamentoPixResponse(@JsonProperty("id") String id, @JsonProperty("customer") String customer,
-			@JsonProperty("status") String status,  @JsonProperty("value") Long value,
-			@JsonProperty("dueDate") @JsonFormat(pattern = "yyyy-MM-dd") LocalDate dueDate, @JsonProperty("billingType") String billingType) {
+
+public record PagamentoPixResponse(String id, String customer,
+			String status, Long value, @JsonFormat(pattern = "yyyy-MM-dd") LocalDate dueDate, String billingType, String chavePix) {
+
+	public PagamentoPixResponse toPagamentoPixResponse(PixResponse response, KeyPixResponse key) {
+		return new PagamentoPixResponse(response.id(), response.customer(), response.status(), response.value(), response.dueDate(),
+				   response.billingType(), key.chavePix());
+	}
 	
 	public Pagamento toEntity() {
 		
-		Pagamento pagamento = new Pagamento(this.customer, this.dueDate, this.value, this.billingType, this.status);
+		Pagamento pagamento = new Pagamento(this.customer, this.dueDate, this.value, this.billingType, this.status, this.chavePix);
 		pagamento.setId(id);
 		return pagamento;
 	}
-
-
 	
 }

@@ -10,13 +10,14 @@ import org.asynchttpclient.Response;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.JsonNode;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import project.spring.dto.request.PagamentoPixRequest;
-import project.spring.dto.response.PagamentoPixResponse;
+import project.spring.dto.response.KeyPixResponse;
+import project.spring.dto.response.PixResponse;
 
 @Component
 public class PagamentoPixApi {
@@ -24,31 +25,7 @@ public class PagamentoPixApi {
 	@Value("${asaas.api-key}")
 	 private String API_KEY;
 	
-	public String createKeyPix() throws IOException{
-		
-		  AsyncHttpClient client = new DefaultAsyncHttpClient();
-	        try {
-	          
-	            Response resp = client.prepare("POST", "https://api-sandbox.asaas.com/v3/pix/addressKeys")
-	                .setHeader("accept", "application/json")
-	                .setHeader("content-type", "application/json")
-	                .setHeader("access_token", API_KEY)
-	                .setBody("{\"type\":\"EVP\"}")
-	                .execute()
-	                .toCompletableFuture()
-	                .join();
-
-	            ObjectMapper mapper = new ObjectMapper();
-	            JsonNode root = mapper.readTree(resp.getResponseBody());
-	            return root.get("keyValue").asText();
-
-	        } finally {
-	            client.close();
-	        }
-	    }
-	
-	
-	public PagamentoPixResponse createPayment(PagamentoPixRequest request, String customer) throws IOException {
+	public PixResponse createPayment(PagamentoPixRequest request, String customer) throws IOException {
 		AsyncHttpClient client = new DefaultAsyncHttpClient();
 		 
 		try {
@@ -67,12 +44,28 @@ public class PagamentoPixApi {
 				    .addModule(new JavaTimeModule())
 				    .build();
 			
-			return mapper.readValue(resp.getResponseBody(), PagamentoPixResponse.class);
+			return mapper.readValue(resp.getResponseBody(), PixResponse.class);
 			
 		}finally{
 			client.close();
 		}
 		
+	}
+	
+	public KeyPixResponse getPixKey(String payloadId) throws IOException {
+		AsyncHttpClient client = new DefaultAsyncHttpClient();
+		try {
+		Response resp = client.prepare("GET", "https://api-sandbox.asaas.com/v3/payments/"+payloadId+"/pixQrCode")
+		  .setHeader("accept", "application/json")
+		  .setHeader("access_token", API_KEY)
+		  .execute()
+		  .toCompletableFuture()
+		  .join();
+
+		return new ObjectMapper().readValue(resp.getResponseBody(), KeyPixResponse.class);
+		}finally {
+		client.close();
+		}
 	}
 
 }
