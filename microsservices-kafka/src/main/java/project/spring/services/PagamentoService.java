@@ -43,7 +43,7 @@ public class PagamentoService {
 		var customer = usuarioPagamentoRepository.findByCustomer("cus_000006682352");
 		
 		if(customer.isEmpty()) {
-			UsuarioPagamentoRequest usuarioPagamentoRequest = new UsuarioPagamentoRequest("23418115403", "Juninho Tornado");
+			UsuarioPagamentoRequest usuarioPagamentoRequest = new UsuarioPagamentoRequest(null,"23418115403", "Juninho Tornado");
 			var usuarioPagamento = usuarioPagamentoService.UsuarioPagamento(usuarioPagamentoRequest);
 			var pagamento = pagamentoPix.createPayment(request, usuarioPagamento.customer());
 			var keyPix = pagamentoPix.getPixKey(pagamento.id());
@@ -74,7 +74,7 @@ public class PagamentoService {
 		var customer = usuarioPagamentoRepository.findByCustomer("cus_000006682352");
 		
 		if(customer.isEmpty()) {
-			UsuarioPagamentoRequest usuarioPagamentoRequest = new UsuarioPagamentoRequest("23418115403", "Juninho Tornado");
+			UsuarioPagamentoRequest usuarioPagamentoRequest = new UsuarioPagamentoRequest(null,"23418115403", "Juninho Tornado");
 			var usuarioPagamento = usuarioPagamentoService.UsuarioPagamento(usuarioPagamentoRequest);
 			var responseCredito = pagamentoCredito.createPagamento(requestPagamentoCredito, requestTitular, usuarioPagamento.customer());
 			

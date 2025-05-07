@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import project.spring.dto.request.UsuarioRequest;
 import project.spring.entities.Usuario;
 import project.spring.services.UsuarioServices;
 
@@ -68,9 +69,8 @@ public class UsuarioResources {
 	 *
 	 */
 	@PostMapping
-	@PreAuthorize("hasAuthority('SCOPE_ADMIN')")
-	public ResponseEntity<Usuario> saveUser(@RequestBody Usuario usuario){
-		usuario = services.saveUser(usuario);
+	public ResponseEntity<Usuario> saveUser(@RequestBody UsuarioRequest request){
+		Usuario usuario = services.saveUser(request);
 		return ResponseEntity.status(HttpStatus.CREATED).body(usuario);
 	}
 	/*
@@ -81,7 +81,7 @@ public class UsuarioResources {
 	 *
 	 */
 	@PutMapping(value = "/{id}")
-	@PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+	@PreAuthorize("hasAuthority('SCOPE_BASIC')")
 	public ResponseEntity<Usuario> updateUser(@RequestBody Usuario usuario, JwtAuthenticationToken token){
 		usuario = services.updateUser(usuario, token);
 		return ResponseEntity.status(HttpStatus.OK).body(usuario);
@@ -94,7 +94,7 @@ public class UsuarioResources {
 	 *
 	 */
 	@DeleteMapping(value = "/{id}")
-	@PreAuthorize("hasAuthority('SCOPE_ADMIN')")
+	@PreAuthorize("hasAuthority('SCOPE_BASIC')")
 	public ResponseEntity<String> deleteUser(@PathVariable UUID id){
 		return ResponseEntity.status(HttpStatus.OK).body(services.deleteUserById(id));
 	}

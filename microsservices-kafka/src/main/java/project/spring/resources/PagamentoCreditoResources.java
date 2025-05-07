@@ -27,7 +27,7 @@ public class PagamentoCreditoResources {
 	@PostMapping
 	public ResponseEntity<PagamentoCreditoResponse> createPagamento(@RequestBody @Valid PagamentoCreditoWrapperRequest wrapper) throws IOException{
 	
-		
+		System.out.println(wrapper);
 		PagamentoCreditoRequest pagReq    = wrapper.pagamentoCredito();
 		TitularCartaoCreditoRequest titReq = wrapper.titularCartao();
 		

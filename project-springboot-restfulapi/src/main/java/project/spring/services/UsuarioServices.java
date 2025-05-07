@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import project.spring.dto.request.UsuarioRequest;
 import project.spring.entities.Role;
 import project.spring.entities.Usuario;
 import project.spring.repository.RoleRepository;
@@ -56,7 +57,8 @@ public class UsuarioServices {
 	 *
 	 *
 	 */
-	public Usuario saveUser(Usuario usuario) {	
+	public Usuario saveUser(UsuarioRequest request) {	
+		var usuario = request.toEntity();
 		usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 		Role role = roleRepository.findFirstByName(Role.Values.BASIC.name());
 		usuario.setRoles(Set.of(role));

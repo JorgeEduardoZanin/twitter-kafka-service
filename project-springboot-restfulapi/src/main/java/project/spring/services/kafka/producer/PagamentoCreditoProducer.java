@@ -6,18 +6,19 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import project.spring.avro.Boleto;
+import project.spring.avro.PagamentoRequest;
 
 @Service
-public class BoletoProducer {
+public class PagamentoCreditoProducer {
 
-    @Value("${spring.kafka.topico-assinatura}")
+    @Value("${spring.kafka.topico-assinatura-credito}")
     private String topico;
 
     @Autowired
-    private KafkaTemplate<String, Boleto> kafkaTemplate;
+    private KafkaTemplate<String, PagamentoRequest> kafkaTemplate;
 
-    public void enviarMensagem(Boleto boleto) {
-        kafkaTemplate.send(topico, getKey(boleto), boleto);
+    public void enviarMensagem(PagamentoRequest pagamentoRequest) {
+        kafkaTemplate.send(topico, pagamentoRequest);
     }
     
     private String getKey(Boleto boleto) {

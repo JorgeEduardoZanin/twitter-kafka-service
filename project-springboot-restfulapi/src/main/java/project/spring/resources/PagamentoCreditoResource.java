@@ -10,22 +10,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
-import project.spring.dto.request.BoletoRequest;
-import project.spring.dto.response.BoletoResponse;
-import project.spring.services.BoletoServices;
+
+import project.spring.dto.wrapper.PagamentoRequestControllerWrapper;
+import project.spring.services.PagamentoCreditoService;
 
 @RestController
-@RequestMapping(value = "/assinatura")
-public class BoletoResources {
+@RequestMapping("/assinaturaCredito")
+public class PagamentoCreditoResource {
 
 	@Autowired
-	private BoletoServices services;
+	private PagamentoCreditoService service;
 	
 	@PostMapping
 	@PreAuthorize("hasAuthority('SCOPE_BASIC')")
-	public ResponseEntity<BoletoResponse> salvar(@Valid @RequestBody BoletoRequest boletoRequest, JwtAuthenticationToken token){
-		var boleto = services.saveBoleto(boletoRequest, token);
-		return ResponseEntity.status(201).body(boleto);
+	public ResponseEntity<String> pagamentoCredito(@RequestBody @Valid PagamentoRequestControllerWrapper request, JwtAuthenticationToken token){
+			
+		System.out.println("tenta executar" +request);
+		
+		
+		
+		
+		String pagamento  = service.signature(request.cartaoRequest(), request.titularRequest(), token);
+		
+		return ResponseEntity.ok(pagamento); 
+		
 	}
 	
 }

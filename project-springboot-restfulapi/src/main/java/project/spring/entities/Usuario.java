@@ -40,11 +40,17 @@ public class Usuario implements UserDetails {
 	
 	private String nome;
 	
+	@Column(name = "cpf_cnpj", unique = true, nullable = false, length = 14)
+	private String cpf_cnpj;
+	
+	@Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
+	private boolean primeiraCobranca;
+	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Boleto> boletos;
 	
 	@Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
-	private boolean assinante = false;
+	private boolean assinante;
 
 	
 	@Column(unique = true)
@@ -65,12 +71,17 @@ public class Usuario implements UserDetails {
 	public Usuario() {
     }
 	
-	public Usuario(String nome, String email, Integer idade, String password) {
+	
+
+	public Usuario(String nome, String cpf_cnpj, String email, Integer idade, String password) {
 		this.nome = nome;
-		this.password = password;
+		this.cpf_cnpj = cpf_cnpj;
 		this.email = email;
 		this.idade = idade;
+		this.password = password;
 	}
+
+
 
 	public UUID getId() {
 		return id;
@@ -143,6 +154,30 @@ public class Usuario implements UserDetails {
 	public void setAssinante(boolean assinante) {
 		this.assinante = assinante;
 	}
+
+	public String getCpf_cnpj() {
+		return cpf_cnpj;
+	}
+
+
+
+	public void setCpf_cnpj(String cpf_cnpj) {
+		this.cpf_cnpj = cpf_cnpj;
+	}
+
+
+
+	public boolean isPrimeiraCobranca() {
+		return primeiraCobranca;
+	}
+
+
+
+	public void setPrimeiraCobranca(boolean primeiraCobranca) {
+		this.primeiraCobranca = primeiraCobranca;
+	}
+
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
