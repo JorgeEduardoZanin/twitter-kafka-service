@@ -37,6 +37,7 @@ public record PagamentoRequest(CartaoCreditoRequest cartao, TitularCartaoCredito
 	        project.spring.avro.UsuarioPagamentoRequest.newBuilder()
 	            .setId(this.usuario.id())
 	            .setCpfCnpj(this.usuario.cpf_cnpj())
+	            .setNome(this.usuario.nome())
 	            .build();
 	    
 	    

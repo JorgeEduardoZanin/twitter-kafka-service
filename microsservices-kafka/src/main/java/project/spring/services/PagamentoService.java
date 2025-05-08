@@ -1,6 +1,7 @@
 package project.spring.services;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import project.spring.dto.request.TitularCartaoCreditoRequest;
 import project.spring.dto.request.UsuarioPagamentoRequest;
 import project.spring.dto.response.PagamentoCreditoResponse;
 import project.spring.dto.response.PagamentoPixResponse;
-
+import project.spring.dto.wrapper.PagamentoCreditoWrapperRequest;
 import project.spring.repository.PagamentoRepository;
 import project.spring.repository.UsuarioPagamentoRepository;
 import project.spring.services.pagamento.PagamentoCreditoApi;
@@ -70,19 +71,19 @@ public class PagamentoService {
 		
 	}
 	
-	public PagamentoCreditoResponse createPagamentoCredito(PagamentoCreditoRequest requestPagamentoCredito, TitularCartaoCreditoRequest requestTitular) throws IOException {
-		var customer = usuarioPagamentoRepository.findByCustomer("cus_000006682352");
-		
+	public PagamentoCreditoResponse createPagamentoCredito(PagamentoCreditoWrapperRequest wrapper) throws IOException {
+		var customer = usuarioPagamentoRepository.findByCustomer(wrapper.usuario().usuarioId());
+		System.out.println(wrapper);
 		if(customer.isEmpty()) {
-			UsuarioPagamentoRequest usuarioPagamentoRequest = new UsuarioPagamentoRequest(null,"23418115403", "Juninho Tornado");
+			UsuarioPagamentoRequest usuarioPagamentoRequest = new UsuarioPagamentoRequest(wrapper.usuario().usuarioId(), wrapper.usuario().cpf_cnpj(), wrapper.usuario().nome());
 			var usuarioPagamento = usuarioPagamentoService.UsuarioPagamento(usuarioPagamentoRequest);
-			var responseCredito = pagamentoCredito.createPagamento(requestPagamentoCredito, requestTitular, usuarioPagamento.customer());
-			
+			var responseCredito = pagamentoCredito.createPagamento(wrapper.pagamentoCredito(), wrapper.titularCartao(), usuarioPagamento.customer(), wrapper.value());
+			System.out.println(responseCredito);
 			pagamentoRepository.save(responseCredito.toEntity());
 			return responseCredito;
 		}
 		
-		var responseCredito = pagamentoCredito.createPagamento(requestPagamentoCredito, requestTitular, customer.get().getCustomer());
+		var responseCredito = pagamentoCredito.createPagamento(wrapper.pagamentoCredito(), wrapper.titularCartao(), customer.get().getCustomer(), wrapper.value());
 		pagamentoRepository.save(responseCredito.toEntity());
 		return responseCredito;
 	}

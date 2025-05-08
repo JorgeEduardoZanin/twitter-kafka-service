@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -1616328978116072462L;
+  private static final long serialVersionUID = -8420793803915345690L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UsuarioPagamentoRequest\",\"namespace\":\"project.spring.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"cpf_cnpj\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UsuarioPagamentoRequest\",\"namespace\":\"project.spring.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"nome\",\"type\":\"string\"},{\"name\":\"cpf_cnpj\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -74,6 +74,7 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
   }
 
   private java.lang.CharSequence id;
+  private java.lang.CharSequence nome;
   private java.lang.CharSequence cpf_cnpj;
 
   /**
@@ -86,10 +87,12 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
   /**
    * All-args constructor.
    * @param id The new value for id
+   * @param nome The new value for nome
    * @param cpf_cnpj The new value for cpf_cnpj
    */
-  public UsuarioPagamentoRequest(java.lang.CharSequence id, java.lang.CharSequence cpf_cnpj) {
+  public UsuarioPagamentoRequest(java.lang.CharSequence id, java.lang.CharSequence nome, java.lang.CharSequence cpf_cnpj) {
     this.id = id;
+    this.nome = nome;
     this.cpf_cnpj = cpf_cnpj;
   }
 
@@ -104,7 +107,8 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return id;
-    case 1: return cpf_cnpj;
+    case 1: return nome;
+    case 2: return cpf_cnpj;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -115,7 +119,8 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: id = (java.lang.CharSequence)value$; break;
-    case 1: cpf_cnpj = (java.lang.CharSequence)value$; break;
+    case 1: nome = (java.lang.CharSequence)value$; break;
+    case 2: cpf_cnpj = (java.lang.CharSequence)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -135,6 +140,23 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
    */
   public void setId(java.lang.CharSequence value) {
     this.id = value;
+  }
+
+  /**
+   * Gets the value of the 'nome' field.
+   * @return The value of the 'nome' field.
+   */
+  public java.lang.CharSequence getNome() {
+    return nome;
+  }
+
+
+  /**
+   * Sets the value of the 'nome' field.
+   * @param value the value to set.
+   */
+  public void setNome(java.lang.CharSequence value) {
+    this.nome = value;
   }
 
   /**
@@ -196,6 +218,7 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
     implements org.apache.avro.data.RecordBuilder<UsuarioPagamentoRequest> {
 
     private java.lang.CharSequence id;
+    private java.lang.CharSequence nome;
     private java.lang.CharSequence cpf_cnpj;
 
     /** Creates a new Builder */
@@ -213,9 +236,13 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.cpf_cnpj)) {
-        this.cpf_cnpj = data().deepCopy(fields()[1].schema(), other.cpf_cnpj);
+      if (isValidValue(fields()[1], other.nome)) {
+        this.nome = data().deepCopy(fields()[1].schema(), other.nome);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
+      }
+      if (isValidValue(fields()[2], other.cpf_cnpj)) {
+        this.cpf_cnpj = data().deepCopy(fields()[2].schema(), other.cpf_cnpj);
+        fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
     }
 
@@ -229,9 +256,13 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
         this.id = data().deepCopy(fields()[0].schema(), other.id);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.cpf_cnpj)) {
-        this.cpf_cnpj = data().deepCopy(fields()[1].schema(), other.cpf_cnpj);
+      if (isValidValue(fields()[1], other.nome)) {
+        this.nome = data().deepCopy(fields()[1].schema(), other.nome);
         fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.cpf_cnpj)) {
+        this.cpf_cnpj = data().deepCopy(fields()[2].schema(), other.cpf_cnpj);
+        fieldSetFlags()[2] = true;
       }
     }
 
@@ -276,6 +307,46 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
     }
 
     /**
+      * Gets the value of the 'nome' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getNome() {
+      return nome;
+    }
+
+
+    /**
+      * Sets the value of the 'nome' field.
+      * @param value The value of 'nome'.
+      * @return This builder.
+      */
+    public project.spring.avro.UsuarioPagamentoRequest.Builder setNome(java.lang.CharSequence value) {
+      validate(fields()[1], value);
+      this.nome = value;
+      fieldSetFlags()[1] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'nome' field has been set.
+      * @return True if the 'nome' field has been set, false otherwise.
+      */
+    public boolean hasNome() {
+      return fieldSetFlags()[1];
+    }
+
+
+    /**
+      * Clears the value of the 'nome' field.
+      * @return This builder.
+      */
+    public project.spring.avro.UsuarioPagamentoRequest.Builder clearNome() {
+      nome = null;
+      fieldSetFlags()[1] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'cpf_cnpj' field.
       * @return The value.
       */
@@ -290,9 +361,9 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
       * @return This builder.
       */
     public project.spring.avro.UsuarioPagamentoRequest.Builder setCpfCnpj(java.lang.CharSequence value) {
-      validate(fields()[1], value);
+      validate(fields()[2], value);
       this.cpf_cnpj = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -301,7 +372,7 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
       * @return True if the 'cpf_cnpj' field has been set, false otherwise.
       */
     public boolean hasCpfCnpj() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
 
 
@@ -311,7 +382,7 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
       */
     public project.spring.avro.UsuarioPagamentoRequest.Builder clearCpfCnpj() {
       cpf_cnpj = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -321,7 +392,8 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
       try {
         UsuarioPagamentoRequest record = new UsuarioPagamentoRequest();
         record.id = fieldSetFlags()[0] ? this.id : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.cpf_cnpj = fieldSetFlags()[1] ? this.cpf_cnpj : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.nome = fieldSetFlags()[1] ? this.nome : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.cpf_cnpj = fieldSetFlags()[2] ? this.cpf_cnpj : (java.lang.CharSequence) defaultValue(fields()[2]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -356,6 +428,8 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
   {
     out.writeString(this.id);
 
+    out.writeString(this.nome);
+
     out.writeString(this.cpf_cnpj);
 
   }
@@ -367,16 +441,22 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
     if (fieldOrder == null) {
       this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
 
+      this.nome = in.readString(this.nome instanceof Utf8 ? (Utf8)this.nome : null);
+
       this.cpf_cnpj = in.readString(this.cpf_cnpj instanceof Utf8 ? (Utf8)this.cpf_cnpj : null);
 
     } else {
-      for (int i = 0; i < 2; i++) {
+      for (int i = 0; i < 3; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
           break;
 
         case 1:
+          this.nome = in.readString(this.nome instanceof Utf8 ? (Utf8)this.nome : null);
+          break;
+
+        case 2:
           this.cpf_cnpj = in.readString(this.cpf_cnpj instanceof Utf8 ? (Utf8)this.cpf_cnpj : null);
           break;
 
