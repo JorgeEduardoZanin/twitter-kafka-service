@@ -1,5 +1,5 @@
 {
-  "namespace": "project.spring.dto.wrapper",
+  "namespace": "project.spring.avro",
   "type": "record",
   "name": "PagamentoRequest",
   "fields": [
