@@ -11,6 +11,9 @@ import project.spring.entities.UsuarioPagamento;
 public interface UsuarioPagamentoRepository extends JpaRepository<UsuarioPagamento, String>{
 
 	
+	public Optional<UsuarioPagamento> findByUsuarioId(String u);
+	
 	public Optional<UsuarioPagamento> findByCustomer(String customerId);
+	
 	
 }

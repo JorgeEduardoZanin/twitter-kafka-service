@@ -21,8 +21,8 @@ public class UsuarioPagamentoService {
 	
 	public UsuarioPagamentoResponse UsuarioPagamento(UsuarioPagamentoRequest request) throws IOException {
 		var usuario = usuarioPagamento.createUsuarioPagamento(request);
-		System.out.println(usuario);
-		usuarioPagamentoRepository.save(usuario.toEntity());
+
+		usuarioPagamentoRepository.save(usuario.toEntity(request.usuarioId()));
 		return usuario;
 	}
 	

@@ -1,14 +1,11 @@
 package project.spring.services;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import project.spring.dto.request.PagamentoCreditoRequest;
 import project.spring.dto.request.PagamentoPixRequest;
-import project.spring.dto.request.TitularCartaoCreditoRequest;
 import project.spring.dto.request.UsuarioPagamentoRequest;
 import project.spring.dto.response.PagamentoCreditoResponse;
 import project.spring.dto.response.PagamentoPixResponse;
@@ -41,7 +38,7 @@ public class PagamentoService {
 	
 
 	public PagamentoPixResponse createPagamentoPix(PagamentoPixRequest request) throws IOException {
-		var customer = usuarioPagamentoRepository.findByCustomer("cus_000006682352");
+		var customer = usuarioPagamentoRepository.findByUsuarioId("cus_000006682352");
 		
 		if(customer.isEmpty()) {
 			UsuarioPagamentoRequest usuarioPagamentoRequest = new UsuarioPagamentoRequest(null,"23418115403", "Juninho Tornado");
@@ -54,7 +51,7 @@ public class PagamentoService {
 					pagamento.billingType(), keyPix.chavePix());
 			
 			
-			pagamentoRepository.save(response.toEntity());
+			pagamentoRepository.save(response.toEntity(null));
 			return response;
 		}
 		
@@ -66,25 +63,26 @@ public class PagamentoService {
 				pagamento.billingType(), keyPix.chavePix());
 	
 		System.out.println(pagamento);
-		pagamentoRepository.save(response.toEntity());
+		pagamentoRepository.save(response.toEntity(null));
 		return response;
 		
 	}
 	
 	public PagamentoCreditoResponse createPagamentoCredito(PagamentoCreditoWrapperRequest wrapper) throws IOException {
-		var customer = usuarioPagamentoRepository.findByCustomer(wrapper.usuario().usuarioId());
-		System.out.println(wrapper);
+		var customer = usuarioPagamentoRepository.findByUsuarioId(wrapper.usuario().usuarioId());
+	
 		if(customer.isEmpty()) {
 			UsuarioPagamentoRequest usuarioPagamentoRequest = new UsuarioPagamentoRequest(wrapper.usuario().usuarioId(), wrapper.usuario().cpf_cnpj(), wrapper.usuario().nome());
 			var usuarioPagamento = usuarioPagamentoService.UsuarioPagamento(usuarioPagamentoRequest);
 			var responseCredito = pagamentoCredito.createPagamento(wrapper.pagamentoCredito(), wrapper.titularCartao(), usuarioPagamento.customer(), wrapper.value());
-			System.out.println(responseCredito);
-			pagamentoRepository.save(responseCredito.toEntity());
+			
+			pagamentoRepository.save(responseCredito.toEntity(wrapper.usuario().usuarioId()));
+			
 			return responseCredito;
 		}
 		
 		var responseCredito = pagamentoCredito.createPagamento(wrapper.pagamentoCredito(), wrapper.titularCartao(), customer.get().getCustomer(), wrapper.value());
-		pagamentoRepository.save(responseCredito.toEntity());
+		pagamentoRepository.save(responseCredito.toEntity(wrapper.usuario().usuarioId()));
 		return responseCredito;
 	}
 			

@@ -30,8 +30,7 @@ public class UsuarioPagamentoApi {
 				  .execute()
 				  .toCompletableFuture()
 				  .join();
-				System.out.println(resp);
-			
+		
 				return new ObjectMapper().findAndRegisterModules().readValue(resp.getResponseBody(), UsuarioPagamentoResponse.class);
 		}finally {
 				client.close();

@@ -2,6 +2,7 @@ package project.spring.entities;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -12,10 +13,10 @@ import jakarta.persistence.Table;
 @Table(name = "tb_usuario_pagamento")
 public class UsuarioPagamento {
 
-
+	@Id
 	private String usuarioId;
 	
-	@Id
+	@Column(unique = true)
 	private String customer;
 
 	private String nome;

@@ -8,8 +8,6 @@ import java.time.format.DateTimeFormatter;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.asynchttpclient.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +27,7 @@ public class PagamentoCreditoApi{
 	@Value("${asaas.api-key}")
 	private String API_KEY;
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(PagamentoCreditoApi.class);
+
 	
 	public PagamentoCreditoResponse createPagamento(PagamentoCreditoRequest requestPagamento, TitularCartaoCreditoRequest titularRequest, String customer, BigDecimal value) throws IOException {
 		AsyncHttpClient client = new DefaultAsyncHttpClient();
@@ -54,8 +52,7 @@ public class PagamentoCreditoApi{
 			ObjectMapper mapper = JsonMapper.builder()
 				    .addModule(new JavaTimeModule())
 				    .build();
-			LOGGER.info("Consumindo mensagem {}",  resp);
-			LOGGER.info("Consumindo mensagem {}",  mapper);
+		
 			return mapper.readValue(resp.getResponseBody(), PagamentoCreditoResponse.class);
 			
 		}finally {

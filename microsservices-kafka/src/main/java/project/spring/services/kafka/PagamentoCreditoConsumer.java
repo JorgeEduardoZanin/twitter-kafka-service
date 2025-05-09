@@ -37,6 +37,7 @@ public class PagamentoCreditoConsumer{
 		TitularCartaoCreditoRequest titularCartaoRequest = TitularCartaoCreditoRequest.toTitularCartaoRequest(pagamento);
 		UsuarioPagamentoRequest usuarioRequest = UsuarioPagamentoRequest.toUsuarioRequest(pagamento);
 		BigDecimal value  = DecimalUtils.toBigDecimal(pagamento.getValue(), 2);
+
 		PagamentoCreditoWrapperRequest  wrapper = new PagamentoCreditoWrapperRequest(creditoRequest, titularCartaoRequest, usuarioRequest, value);
 		service.createPagamentoCredito(wrapper);
 			

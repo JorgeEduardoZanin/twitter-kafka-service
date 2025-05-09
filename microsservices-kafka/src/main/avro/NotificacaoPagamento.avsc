@@ -1,0 +1,13 @@
+{
+  "namespace": "project.spring.avro",
+  "type":      "record",
+  "name":      "NotificacaoPagamento",
+  "fields": [
+    { "name": "usuarioId",   "type": "string" },
+    { "name": "id",   "type": "string" },
+    { "name": "billingType",   "type": "string" },
+    { "name": "dueDate",   "type": "string" },
+    { "name": "status",         "type": "string" }
+    
+  ]
+}

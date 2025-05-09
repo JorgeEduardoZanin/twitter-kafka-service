@@ -46,8 +46,6 @@ public class Usuario implements UserDetails {
 	@Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
 	private boolean primeiraCobranca;
 	
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Boleto> boletos;
 	
 	@Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
 	private boolean assinante;
@@ -139,13 +137,6 @@ public class Usuario implements UserDetails {
 		this.roles = roles;
 	}
 
-	public List<Boleto> getBoletos() {
-		return boletos;
-	}
-
-	public void setBoletos(List<Boleto> boletos) {
-		this.boletos = boletos;
-	}
 
 	public boolean isAssinante() {
 		return assinante;

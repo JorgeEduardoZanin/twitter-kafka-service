@@ -1,5 +1,6 @@
 package project.spring.dto.response;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -10,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record PixResponse(@JsonProperty("id") String id, @JsonProperty("customer") String customer,
-			@JsonProperty("status") String status,  @JsonProperty("value") Long value,
+			@JsonProperty("status") String status,  @JsonProperty("value") BigDecimal value,
 			@JsonProperty("dueDate") @JsonFormat(pattern = "yyyy-MM-dd") LocalDate dueDate,
 			@JsonProperty("billingType") String billingType) {
 }

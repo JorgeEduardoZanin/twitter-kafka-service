@@ -1,5 +1,6 @@
 package project.spring.entities;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 
@@ -20,7 +21,7 @@ public class Pagamento {
 	private String customer;
 	
 	private LocalDate dueDate;
-	private Long value;
+	private BigDecimal value;
 	private String chavePix;
 	private String billingType;
 	private String status;
@@ -33,7 +34,7 @@ public class Pagamento {
 
 	}
 
-	public Pagamento(String customer, LocalDate dueDate, Long value, String billingType, String status) {
+	public Pagamento(String customer, LocalDate dueDate, BigDecimal value, String billingType, String status) {
 		this.customer = customer;
 		this.dueDate = dueDate;
 		this.value = value;
@@ -65,11 +66,11 @@ public class Pagamento {
 		this.dueDate = dueDate;
 	}
 
-	public Long getValue() {
+	public BigDecimal getValue() {
 		return value;
 	}
 
-	public void setValue(Long value) {
+	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
 
@@ -95,5 +96,13 @@ public class Pagamento {
 
 	public void setChavePix(String chavePix) {
 		this.chavePix = chavePix;
+	}
+
+	public UsuarioPagamento getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(UsuarioPagamento usuario) {
+		this.usuario = usuario;
 	}	
 }
