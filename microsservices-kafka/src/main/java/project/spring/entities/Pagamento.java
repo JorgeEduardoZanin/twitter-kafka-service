@@ -26,6 +26,7 @@ public class Pagamento {
 	private String billingType;
 	private String status;
 	
+	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_pagamento_id")
 	private UsuarioPagamento usuario;
@@ -104,5 +105,6 @@ public class Pagamento {
 
 	public void setUsuario(UsuarioPagamento usuario) {
 		this.usuario = usuario;
-	}	
+	}
+	
 }

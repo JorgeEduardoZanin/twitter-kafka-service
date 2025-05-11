@@ -7,6 +7,7 @@
     { "name": "id",   "type": "string" },
     { "name": "billingType",   "type": "string" },
     { "name": "dueDate",   "type": "string" },
+     { "name": "ChavePix",   "type": "string" },
     { "name": "status",         "type": "string" }
     
   ]

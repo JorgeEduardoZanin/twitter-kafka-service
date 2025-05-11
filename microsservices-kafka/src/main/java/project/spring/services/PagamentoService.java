@@ -1,12 +1,15 @@
 package project.spring.services;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import project.spring.dto.request.PagamentoPixRequest;
 import project.spring.dto.request.UsuarioPagamentoRequest;
+import project.spring.dto.response.NotificacaoResponse;
 import project.spring.dto.response.PagamentoCreditoResponse;
 import project.spring.dto.response.PagamentoPixResponse;
 import project.spring.dto.wrapper.PagamentoCreditoWrapperRequest;
@@ -84,6 +87,12 @@ public class PagamentoService {
 		var responseCredito = pagamentoCredito.createPagamento(wrapper.pagamentoCredito(), wrapper.titularCartao(), customer.get().getCustomer(), wrapper.value());
 		pagamentoRepository.save(responseCredito.toEntity(wrapper.usuario().usuarioId()));
 		return responseCredito;
+	}
+	
+	public NotificacaoResponse getPagamentoCredito(Long identificadorApiPrincipal) {
+		var pagamento = pagamentoRepository.findById(UUID.fromString(identificadorApiPrincipal);
+		return NotificacaoResponse.toResponse(pagamento.get());
+		
 	}
 			
 }

@@ -1,5 +1,6 @@
 package project.spring.entities;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -22,6 +23,8 @@ public class UsuarioPagamento {
 	private String nome;
 	
 	private String cpf_cnpj;
+	
+	private LocalDate expiracaoAssinatura;
 	
 	@OneToMany(mappedBy = "usuario" ,fetch = FetchType.LAZY)
 	private List<Pagamento> pagamento;
@@ -73,5 +76,13 @@ public class UsuarioPagamento {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public LocalDate getExpiracaoAssinatura() {
+		return expiracaoAssinatura;
+	}
+
+	public void setExpiracaoAssinatura(LocalDate expiracaoAssinatura) {
+		this.expiracaoAssinatura = expiracaoAssinatura;
 	}
 }
