@@ -3,11 +3,12 @@
   "type":      "record",
   "name":      "NotificacaoPagamento",
   "fields": [
-    { "name": "usuarioId",   "type": "string" },
-    { "name": "id",   "type": "string" },
-    { "name": "billingType",   "type": "string" },
-    { "name": "dueDate",   "type": "string" },
-     { "name": "ChavePix",   "type": "string" },
+    { "name": "usuarioId",   	"type": "string" },
+    { "name": "paymentId",   	"type": "string" },
+    { "name": "billingType",   	"type": "string" },
+    { "name": "dueDate",   		"type": "string" },
+    { "name": "chavePix",   	"type": "string" },
+    { "name":"dataExpiracao",  	"type": "string" },
     { "name": "status",         "type": "string" }
     
   ]

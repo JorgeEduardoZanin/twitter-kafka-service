@@ -1,10 +1,8 @@
 package project.spring.services;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import project.spring.dto.request.PagamentoPixRequest;
@@ -90,7 +88,7 @@ public class PagamentoService {
 	}
 	
 	public NotificacaoResponse getPagamentoCredito(Long identificadorApiPrincipal) {
-		var pagamento = pagamentoRepository.findById(UUID.fromString(identificadorApiPrincipal);
+		var pagamento = pagamentoRepository.findByIdentificadorApiPrincipal(identificadorApiPrincipal);
 		return NotificacaoResponse.toResponse(pagamento.get());
 		
 	}

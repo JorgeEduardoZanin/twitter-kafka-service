@@ -14,6 +14,9 @@ import project.spring.dto.request.CartaoCreditoRequest;
 import project.spring.dto.request.TitularCartaoCreditoRequest;
 import project.spring.dto.request.UsuarioPagamentoRequest;
 import project.spring.dto.wrapper.PagamentoRequest;
+import project.spring.entities.NotificacaoPagamento;
+import project.spring.enums.StatusPagamento;
+import project.spring.repository.NotificacaoPagamentoRepository;
 import project.spring.repository.UsuarioRepository;
 import project.spring.services.kafka.producer.PagamentoCreditoProducer;
 
@@ -29,10 +32,19 @@ public class PagamentoCreditoService {
 	@Autowired
 	private UsuarioRepository repository;
 	
+	@Autowired
+	private NotificacaoPagamentoRepository notificacaoPagamentoRepository;
+	
 	public String signature(CartaoCreditoRequest cartaoRequest, TitularCartaoCreditoRequest titularCartaoRequest, JwtAuthenticationToken token) {
 		var usuario = repository.findById(UUID.fromString(token.getName())).get();
 	
 		UsuarioPagamentoRequest usuarioRequest = new UsuarioPagamentoRequest(usuario.getId().toString(), usuario.getCpf_cnpj(), usuario.getNome());
+		
+		NotificacaoPagamento notPagamento = new NotificacaoPagamento();
+		notPagamento.setStatus(StatusPagamento.PENDING);
+		notificacaoPagamentoRepository.save(notPagamento);
+		notPagamento.getId();
+		
 		
 		PagamentoRequest request = new PagamentoRequest(cartaoRequest, titularCartaoRequest, assinaturaValor, usuarioRequest);
 	
