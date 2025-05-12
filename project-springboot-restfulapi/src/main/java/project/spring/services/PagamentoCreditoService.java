@@ -46,7 +46,6 @@ public class PagamentoCreditoService {
 		notPagamento.getId();
 		
 		
-		PagamentoRequest request = new PagamentoRequest(cartaoRequest, titularCartaoRequest, assinaturaValor, usuarioRequest);
 	
 		producer.enviarMensagem(request.toAvro());
 		

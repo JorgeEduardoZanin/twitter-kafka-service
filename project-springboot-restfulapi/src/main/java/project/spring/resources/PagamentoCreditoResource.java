@@ -27,9 +27,6 @@ public class PagamentoCreditoResource {
 			
 		System.out.println("tenta executar" +request);
 		
-		
-		
-		
 		String pagamento  = service.signature(request.cartaoRequest(), request.titularRequest(), token);
 		
 		return ResponseEntity.ok(pagamento); 
