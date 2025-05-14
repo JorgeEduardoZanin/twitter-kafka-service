@@ -20,5 +20,5 @@ public interface PagamentoRepository extends JpaRepository<Pagamento, String> {
 	
 	public List<Pagamento> findByUsuarioUsuarioId(String usuarioId);
 	
-	public Optional<Pagamento> findByIdentificadorApiPrincipal(Long identificadorApiPrincipal);	
+	public Optional<Pagamento> findByIdApiPrincipal(Long identificadorApiPrincipal);	
 }

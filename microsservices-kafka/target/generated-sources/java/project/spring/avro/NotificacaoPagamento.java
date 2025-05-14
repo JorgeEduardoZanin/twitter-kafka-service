@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 6292206921122829854L;
+  private static final long serialVersionUID = 3162501286874444352L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NotificacaoPagamento\",\"namespace\":\"project.spring.avro\",\"fields\":[{\"name\":\"usuarioId\",\"type\":\"string\"},{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"billingType\",\"type\":\"string\"},{\"name\":\"dueDate\",\"type\":\"string\"},{\"name\":\"status\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NotificacaoPagamento\",\"namespace\":\"project.spring.avro\",\"fields\":[{\"name\":\"usuarioId\",\"type\":\"string\"},{\"name\":\"paymentId\",\"type\":\"string\"},{\"name\":\"billingType\",\"type\":\"string\"},{\"name\":\"dueDate\",\"type\":\"string\"},{\"name\":\"chavePix\",\"type\":\"string\"},{\"name\":\"dataExpiracao\",\"type\":\"string\"},{\"name\":\"status\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -74,9 +74,11 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
   }
 
   private java.lang.CharSequence usuarioId;
-  private java.lang.CharSequence id;
+  private java.lang.CharSequence paymentId;
   private java.lang.CharSequence billingType;
   private java.lang.CharSequence dueDate;
+  private java.lang.CharSequence chavePix;
+  private java.lang.CharSequence dataExpiracao;
   private java.lang.CharSequence status;
 
   /**
@@ -89,16 +91,20 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
   /**
    * All-args constructor.
    * @param usuarioId The new value for usuarioId
-   * @param id The new value for id
+   * @param paymentId The new value for paymentId
    * @param billingType The new value for billingType
    * @param dueDate The new value for dueDate
+   * @param chavePix The new value for chavePix
+   * @param dataExpiracao The new value for dataExpiracao
    * @param status The new value for status
    */
-  public NotificacaoPagamento(java.lang.CharSequence usuarioId, java.lang.CharSequence id, java.lang.CharSequence billingType, java.lang.CharSequence dueDate, java.lang.CharSequence status) {
+  public NotificacaoPagamento(java.lang.CharSequence usuarioId, java.lang.CharSequence paymentId, java.lang.CharSequence billingType, java.lang.CharSequence dueDate, java.lang.CharSequence chavePix, java.lang.CharSequence dataExpiracao, java.lang.CharSequence status) {
     this.usuarioId = usuarioId;
-    this.id = id;
+    this.paymentId = paymentId;
     this.billingType = billingType;
     this.dueDate = dueDate;
+    this.chavePix = chavePix;
+    this.dataExpiracao = dataExpiracao;
     this.status = status;
   }
 
@@ -113,10 +119,12 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return usuarioId;
-    case 1: return id;
+    case 1: return paymentId;
     case 2: return billingType;
     case 3: return dueDate;
-    case 4: return status;
+    case 4: return chavePix;
+    case 5: return dataExpiracao;
+    case 6: return status;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -127,10 +135,12 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: usuarioId = (java.lang.CharSequence)value$; break;
-    case 1: id = (java.lang.CharSequence)value$; break;
+    case 1: paymentId = (java.lang.CharSequence)value$; break;
     case 2: billingType = (java.lang.CharSequence)value$; break;
     case 3: dueDate = (java.lang.CharSequence)value$; break;
-    case 4: status = (java.lang.CharSequence)value$; break;
+    case 4: chavePix = (java.lang.CharSequence)value$; break;
+    case 5: dataExpiracao = (java.lang.CharSequence)value$; break;
+    case 6: status = (java.lang.CharSequence)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -153,20 +163,20 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
   }
 
   /**
-   * Gets the value of the 'id' field.
-   * @return The value of the 'id' field.
+   * Gets the value of the 'paymentId' field.
+   * @return The value of the 'paymentId' field.
    */
-  public java.lang.CharSequence getId() {
-    return id;
+  public java.lang.CharSequence getPaymentId() {
+    return paymentId;
   }
 
 
   /**
-   * Sets the value of the 'id' field.
+   * Sets the value of the 'paymentId' field.
    * @param value the value to set.
    */
-  public void setId(java.lang.CharSequence value) {
-    this.id = value;
+  public void setPaymentId(java.lang.CharSequence value) {
+    this.paymentId = value;
   }
 
   /**
@@ -201,6 +211,40 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
    */
   public void setDueDate(java.lang.CharSequence value) {
     this.dueDate = value;
+  }
+
+  /**
+   * Gets the value of the 'chavePix' field.
+   * @return The value of the 'chavePix' field.
+   */
+  public java.lang.CharSequence getChavePix() {
+    return chavePix;
+  }
+
+
+  /**
+   * Sets the value of the 'chavePix' field.
+   * @param value the value to set.
+   */
+  public void setChavePix(java.lang.CharSequence value) {
+    this.chavePix = value;
+  }
+
+  /**
+   * Gets the value of the 'dataExpiracao' field.
+   * @return The value of the 'dataExpiracao' field.
+   */
+  public java.lang.CharSequence getDataExpiracao() {
+    return dataExpiracao;
+  }
+
+
+  /**
+   * Sets the value of the 'dataExpiracao' field.
+   * @param value the value to set.
+   */
+  public void setDataExpiracao(java.lang.CharSequence value) {
+    this.dataExpiracao = value;
   }
 
   /**
@@ -262,9 +306,11 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
     implements org.apache.avro.data.RecordBuilder<NotificacaoPagamento> {
 
     private java.lang.CharSequence usuarioId;
-    private java.lang.CharSequence id;
+    private java.lang.CharSequence paymentId;
     private java.lang.CharSequence billingType;
     private java.lang.CharSequence dueDate;
+    private java.lang.CharSequence chavePix;
+    private java.lang.CharSequence dataExpiracao;
     private java.lang.CharSequence status;
 
     /** Creates a new Builder */
@@ -282,8 +328,8 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
         this.usuarioId = data().deepCopy(fields()[0].schema(), other.usuarioId);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.id)) {
-        this.id = data().deepCopy(fields()[1].schema(), other.id);
+      if (isValidValue(fields()[1], other.paymentId)) {
+        this.paymentId = data().deepCopy(fields()[1].schema(), other.paymentId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
       if (isValidValue(fields()[2], other.billingType)) {
@@ -294,9 +340,17 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
         this.dueDate = data().deepCopy(fields()[3].schema(), other.dueDate);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
-      if (isValidValue(fields()[4], other.status)) {
-        this.status = data().deepCopy(fields()[4].schema(), other.status);
+      if (isValidValue(fields()[4], other.chavePix)) {
+        this.chavePix = data().deepCopy(fields()[4].schema(), other.chavePix);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
+      }
+      if (isValidValue(fields()[5], other.dataExpiracao)) {
+        this.dataExpiracao = data().deepCopy(fields()[5].schema(), other.dataExpiracao);
+        fieldSetFlags()[5] = other.fieldSetFlags()[5];
+      }
+      if (isValidValue(fields()[6], other.status)) {
+        this.status = data().deepCopy(fields()[6].schema(), other.status);
+        fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
     }
 
@@ -310,8 +364,8 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
         this.usuarioId = data().deepCopy(fields()[0].schema(), other.usuarioId);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.id)) {
-        this.id = data().deepCopy(fields()[1].schema(), other.id);
+      if (isValidValue(fields()[1], other.paymentId)) {
+        this.paymentId = data().deepCopy(fields()[1].schema(), other.paymentId);
         fieldSetFlags()[1] = true;
       }
       if (isValidValue(fields()[2], other.billingType)) {
@@ -322,9 +376,17 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
         this.dueDate = data().deepCopy(fields()[3].schema(), other.dueDate);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.status)) {
-        this.status = data().deepCopy(fields()[4].schema(), other.status);
+      if (isValidValue(fields()[4], other.chavePix)) {
+        this.chavePix = data().deepCopy(fields()[4].schema(), other.chavePix);
         fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.dataExpiracao)) {
+        this.dataExpiracao = data().deepCopy(fields()[5].schema(), other.dataExpiracao);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.status)) {
+        this.status = data().deepCopy(fields()[6].schema(), other.status);
+        fieldSetFlags()[6] = true;
       }
     }
 
@@ -369,41 +431,41 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
     }
 
     /**
-      * Gets the value of the 'id' field.
+      * Gets the value of the 'paymentId' field.
       * @return The value.
       */
-    public java.lang.CharSequence getId() {
-      return id;
+    public java.lang.CharSequence getPaymentId() {
+      return paymentId;
     }
 
 
     /**
-      * Sets the value of the 'id' field.
-      * @param value The value of 'id'.
+      * Sets the value of the 'paymentId' field.
+      * @param value The value of 'paymentId'.
       * @return This builder.
       */
-    public project.spring.avro.NotificacaoPagamento.Builder setId(java.lang.CharSequence value) {
+    public project.spring.avro.NotificacaoPagamento.Builder setPaymentId(java.lang.CharSequence value) {
       validate(fields()[1], value);
-      this.id = value;
+      this.paymentId = value;
       fieldSetFlags()[1] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'id' field has been set.
-      * @return True if the 'id' field has been set, false otherwise.
+      * Checks whether the 'paymentId' field has been set.
+      * @return True if the 'paymentId' field has been set, false otherwise.
       */
-    public boolean hasId() {
+    public boolean hasPaymentId() {
       return fieldSetFlags()[1];
     }
 
 
     /**
-      * Clears the value of the 'id' field.
+      * Clears the value of the 'paymentId' field.
       * @return This builder.
       */
-    public project.spring.avro.NotificacaoPagamento.Builder clearId() {
-      id = null;
+    public project.spring.avro.NotificacaoPagamento.Builder clearPaymentId() {
+      paymentId = null;
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -489,6 +551,86 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
     }
 
     /**
+      * Gets the value of the 'chavePix' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getChavePix() {
+      return chavePix;
+    }
+
+
+    /**
+      * Sets the value of the 'chavePix' field.
+      * @param value The value of 'chavePix'.
+      * @return This builder.
+      */
+    public project.spring.avro.NotificacaoPagamento.Builder setChavePix(java.lang.CharSequence value) {
+      validate(fields()[4], value);
+      this.chavePix = value;
+      fieldSetFlags()[4] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'chavePix' field has been set.
+      * @return True if the 'chavePix' field has been set, false otherwise.
+      */
+    public boolean hasChavePix() {
+      return fieldSetFlags()[4];
+    }
+
+
+    /**
+      * Clears the value of the 'chavePix' field.
+      * @return This builder.
+      */
+    public project.spring.avro.NotificacaoPagamento.Builder clearChavePix() {
+      chavePix = null;
+      fieldSetFlags()[4] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'dataExpiracao' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getDataExpiracao() {
+      return dataExpiracao;
+    }
+
+
+    /**
+      * Sets the value of the 'dataExpiracao' field.
+      * @param value The value of 'dataExpiracao'.
+      * @return This builder.
+      */
+    public project.spring.avro.NotificacaoPagamento.Builder setDataExpiracao(java.lang.CharSequence value) {
+      validate(fields()[5], value);
+      this.dataExpiracao = value;
+      fieldSetFlags()[5] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'dataExpiracao' field has been set.
+      * @return True if the 'dataExpiracao' field has been set, false otherwise.
+      */
+    public boolean hasDataExpiracao() {
+      return fieldSetFlags()[5];
+    }
+
+
+    /**
+      * Clears the value of the 'dataExpiracao' field.
+      * @return This builder.
+      */
+    public project.spring.avro.NotificacaoPagamento.Builder clearDataExpiracao() {
+      dataExpiracao = null;
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'status' field.
       * @return The value.
       */
@@ -503,9 +645,9 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
       * @return This builder.
       */
     public project.spring.avro.NotificacaoPagamento.Builder setStatus(java.lang.CharSequence value) {
-      validate(fields()[4], value);
+      validate(fields()[6], value);
       this.status = value;
-      fieldSetFlags()[4] = true;
+      fieldSetFlags()[6] = true;
       return this;
     }
 
@@ -514,7 +656,7 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
       * @return True if the 'status' field has been set, false otherwise.
       */
     public boolean hasStatus() {
-      return fieldSetFlags()[4];
+      return fieldSetFlags()[6];
     }
 
 
@@ -524,7 +666,7 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
       */
     public project.spring.avro.NotificacaoPagamento.Builder clearStatus() {
       status = null;
-      fieldSetFlags()[4] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -534,10 +676,12 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
       try {
         NotificacaoPagamento record = new NotificacaoPagamento();
         record.usuarioId = fieldSetFlags()[0] ? this.usuarioId : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.id = fieldSetFlags()[1] ? this.id : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.paymentId = fieldSetFlags()[1] ? this.paymentId : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.billingType = fieldSetFlags()[2] ? this.billingType : (java.lang.CharSequence) defaultValue(fields()[2]);
         record.dueDate = fieldSetFlags()[3] ? this.dueDate : (java.lang.CharSequence) defaultValue(fields()[3]);
-        record.status = fieldSetFlags()[4] ? this.status : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.chavePix = fieldSetFlags()[4] ? this.chavePix : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.dataExpiracao = fieldSetFlags()[5] ? this.dataExpiracao : (java.lang.CharSequence) defaultValue(fields()[5]);
+        record.status = fieldSetFlags()[6] ? this.status : (java.lang.CharSequence) defaultValue(fields()[6]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -572,11 +716,15 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
   {
     out.writeString(this.usuarioId);
 
-    out.writeString(this.id);
+    out.writeString(this.paymentId);
 
     out.writeString(this.billingType);
 
     out.writeString(this.dueDate);
+
+    out.writeString(this.chavePix);
+
+    out.writeString(this.dataExpiracao);
 
     out.writeString(this.status);
 
@@ -589,23 +737,27 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
     if (fieldOrder == null) {
       this.usuarioId = in.readString(this.usuarioId instanceof Utf8 ? (Utf8)this.usuarioId : null);
 
-      this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
+      this.paymentId = in.readString(this.paymentId instanceof Utf8 ? (Utf8)this.paymentId : null);
 
       this.billingType = in.readString(this.billingType instanceof Utf8 ? (Utf8)this.billingType : null);
 
       this.dueDate = in.readString(this.dueDate instanceof Utf8 ? (Utf8)this.dueDate : null);
 
+      this.chavePix = in.readString(this.chavePix instanceof Utf8 ? (Utf8)this.chavePix : null);
+
+      this.dataExpiracao = in.readString(this.dataExpiracao instanceof Utf8 ? (Utf8)this.dataExpiracao : null);
+
       this.status = in.readString(this.status instanceof Utf8 ? (Utf8)this.status : null);
 
     } else {
-      for (int i = 0; i < 5; i++) {
+      for (int i = 0; i < 7; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.usuarioId = in.readString(this.usuarioId instanceof Utf8 ? (Utf8)this.usuarioId : null);
           break;
 
         case 1:
-          this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
+          this.paymentId = in.readString(this.paymentId instanceof Utf8 ? (Utf8)this.paymentId : null);
           break;
 
         case 2:
@@ -617,6 +769,14 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
           break;
 
         case 4:
+          this.chavePix = in.readString(this.chavePix instanceof Utf8 ? (Utf8)this.chavePix : null);
+          break;
+
+        case 5:
+          this.dataExpiracao = in.readString(this.dataExpiracao instanceof Utf8 ? (Utf8)this.dataExpiracao : null);
+          break;
+
+        case 6:
           this.status = in.readString(this.status instanceof Utf8 ? (Utf8)this.status : null);
           break;
 

@@ -18,6 +18,8 @@ public class Pagamento {
 	@Id
 	private String id;
 	
+	private Long idApiPrincipal;
+	
 	private String customer;
 	
 	private LocalDate dueDate;
@@ -25,6 +27,7 @@ public class Pagamento {
 	private String chavePix;
 	private String billingType;
 	private String status;
+	
 	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -105,6 +108,14 @@ public class Pagamento {
 
 	public void setUsuario(UsuarioPagamento usuario) {
 		this.usuario = usuario;
+	}
+
+	public Long getIdApiPrincipal() {
+		return idApiPrincipal;
+	}
+
+	public void setIdApiPrincipal(Long idApiPrincipal) {
+		this.idApiPrincipal = idApiPrincipal;
 	}
 	
 }

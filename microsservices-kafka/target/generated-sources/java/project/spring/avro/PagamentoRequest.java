@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 9090281307747354543L;
+  private static final long serialVersionUID = 4439554826835250676L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PagamentoRequest\",\"namespace\":\"project.spring.avro\",\"fields\":[{\"name\":\"cartao\",\"type\":{\"type\":\"record\",\"name\":\"CartaoCreditoRequest\",\"fields\":[{\"name\":\"nomeCartao\",\"type\":\"string\"},{\"name\":\"numeroCartao\",\"type\":\"string\"},{\"name\":\"mesExpiracao\",\"type\":\"string\"},{\"name\":\"anoExpiracao\",\"type\":\"string\"},{\"name\":\"ccv\",\"type\":\"string\"}]}},{\"name\":\"titular\",\"type\":{\"type\":\"record\",\"name\":\"TitularCartaoCreditoRequest\",\"fields\":[{\"name\":\"nomeTitularCartao\",\"type\":\"string\"},{\"name\":\"email\",\"type\":\"string\"},{\"name\":\"cpf_cnpj_titular\",\"type\":\"string\"},{\"name\":\"codigoPostal\",\"type\":\"string\"},{\"name\":\"numeroEndereco\",\"type\":\"string\"},{\"name\":\"telefone\",\"type\":\"string\"}]}},{\"name\":\"value\",\"type\":{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":2}},{\"name\":\"usuario\",\"type\":{\"type\":\"record\",\"name\":\"UsuarioPagamentoRequest\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"nome\",\"type\":\"string\"},{\"name\":\"cpf_cnpj\",\"type\":\"string\"}]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PagamentoRequest\",\"namespace\":\"project.spring.avro\",\"fields\":[{\"name\":\"cartao\",\"type\":{\"type\":\"record\",\"name\":\"CartaoCreditoRequest\",\"fields\":[{\"name\":\"nomeCartao\",\"type\":\"string\"},{\"name\":\"numeroCartao\",\"type\":\"string\"},{\"name\":\"mesExpiracao\",\"type\":\"string\"},{\"name\":\"anoExpiracao\",\"type\":\"string\"},{\"name\":\"ccv\",\"type\":\"string\"}]}},{\"name\":\"titular\",\"type\":{\"type\":\"record\",\"name\":\"TitularCartaoCreditoRequest\",\"fields\":[{\"name\":\"nomeTitularCartao\",\"type\":\"string\"},{\"name\":\"email\",\"type\":\"string\"},{\"name\":\"cpf_cnpj_titular\",\"type\":\"string\"},{\"name\":\"codigoPostal\",\"type\":\"string\"},{\"name\":\"numeroEndereco\",\"type\":\"string\"},{\"name\":\"telefone\",\"type\":\"string\"}]}},{\"name\":\"identificadorApiPrincipal\",\"type\":{\"type\":\"record\",\"name\":\"IdentificadorApiPrincipalRequest\",\"fields\":[{\"name\":\"identificadorApiPrincipal\",\"type\":\"long\"}]}},{\"name\":\"value\",\"type\":{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":2}},{\"name\":\"usuario\",\"type\":{\"type\":\"record\",\"name\":\"UsuarioPagamentoRequest\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"nome\",\"type\":\"string\"},{\"name\":\"cpf_cnpj\",\"type\":\"string\"}]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -78,6 +78,7 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
 
   private project.spring.avro.CartaoCreditoRequest cartao;
   private project.spring.avro.TitularCartaoCreditoRequest titular;
+  private project.spring.avro.IdentificadorApiPrincipalRequest identificadorApiPrincipal;
   private java.nio.ByteBuffer value;
   private project.spring.avro.UsuarioPagamentoRequest usuario;
 
@@ -92,12 +93,14 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
    * All-args constructor.
    * @param cartao The new value for cartao
    * @param titular The new value for titular
+   * @param identificadorApiPrincipal The new value for identificadorApiPrincipal
    * @param value The new value for value
    * @param usuario The new value for usuario
    */
-  public PagamentoRequest(project.spring.avro.CartaoCreditoRequest cartao, project.spring.avro.TitularCartaoCreditoRequest titular, java.nio.ByteBuffer value, project.spring.avro.UsuarioPagamentoRequest usuario) {
+  public PagamentoRequest(project.spring.avro.CartaoCreditoRequest cartao, project.spring.avro.TitularCartaoCreditoRequest titular, project.spring.avro.IdentificadorApiPrincipalRequest identificadorApiPrincipal, java.nio.ByteBuffer value, project.spring.avro.UsuarioPagamentoRequest usuario) {
     this.cartao = cartao;
     this.titular = titular;
+    this.identificadorApiPrincipal = identificadorApiPrincipal;
     this.value = value;
     this.usuario = usuario;
   }
@@ -114,14 +117,16 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
     switch (field$) {
     case 0: return cartao;
     case 1: return titular;
-    case 2: return value;
-    case 3: return usuario;
+    case 2: return identificadorApiPrincipal;
+    case 3: return value;
+    case 4: return usuario;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
 
   private static final org.apache.avro.Conversion<?>[] conversions =
       new org.apache.avro.Conversion<?>[] {
+      null,
       null,
       null,
       null,
@@ -141,8 +146,9 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
     switch (field$) {
     case 0: cartao = (project.spring.avro.CartaoCreditoRequest)value$; break;
     case 1: titular = (project.spring.avro.TitularCartaoCreditoRequest)value$; break;
-    case 2: value = (java.nio.ByteBuffer)value$; break;
-    case 3: usuario = (project.spring.avro.UsuarioPagamentoRequest)value$; break;
+    case 2: identificadorApiPrincipal = (project.spring.avro.IdentificadorApiPrincipalRequest)value$; break;
+    case 3: value = (java.nio.ByteBuffer)value$; break;
+    case 4: usuario = (project.spring.avro.UsuarioPagamentoRequest)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -179,6 +185,23 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
    */
   public void setTitular(project.spring.avro.TitularCartaoCreditoRequest value) {
     this.titular = value;
+  }
+
+  /**
+   * Gets the value of the 'identificadorApiPrincipal' field.
+   * @return The value of the 'identificadorApiPrincipal' field.
+   */
+  public project.spring.avro.IdentificadorApiPrincipalRequest getIdentificadorApiPrincipal() {
+    return identificadorApiPrincipal;
+  }
+
+
+  /**
+   * Sets the value of the 'identificadorApiPrincipal' field.
+   * @param value the value to set.
+   */
+  public void setIdentificadorApiPrincipal(project.spring.avro.IdentificadorApiPrincipalRequest value) {
+    this.identificadorApiPrincipal = value;
   }
 
   /**
@@ -260,6 +283,8 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
     private project.spring.avro.CartaoCreditoRequest.Builder cartaoBuilder;
     private project.spring.avro.TitularCartaoCreditoRequest titular;
     private project.spring.avro.TitularCartaoCreditoRequest.Builder titularBuilder;
+    private project.spring.avro.IdentificadorApiPrincipalRequest identificadorApiPrincipal;
+    private project.spring.avro.IdentificadorApiPrincipalRequest.Builder identificadorApiPrincipalBuilder;
     private java.nio.ByteBuffer value;
     private project.spring.avro.UsuarioPagamentoRequest usuario;
     private project.spring.avro.UsuarioPagamentoRequest.Builder usuarioBuilder;
@@ -289,13 +314,20 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
       if (other.hasTitularBuilder()) {
         this.titularBuilder = project.spring.avro.TitularCartaoCreditoRequest.newBuilder(other.getTitularBuilder());
       }
-      if (isValidValue(fields()[2], other.value)) {
-        this.value = data().deepCopy(fields()[2].schema(), other.value);
+      if (isValidValue(fields()[2], other.identificadorApiPrincipal)) {
+        this.identificadorApiPrincipal = data().deepCopy(fields()[2].schema(), other.identificadorApiPrincipal);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
-      if (isValidValue(fields()[3], other.usuario)) {
-        this.usuario = data().deepCopy(fields()[3].schema(), other.usuario);
+      if (other.hasIdentificadorApiPrincipalBuilder()) {
+        this.identificadorApiPrincipalBuilder = project.spring.avro.IdentificadorApiPrincipalRequest.newBuilder(other.getIdentificadorApiPrincipalBuilder());
+      }
+      if (isValidValue(fields()[3], other.value)) {
+        this.value = data().deepCopy(fields()[3].schema(), other.value);
         fieldSetFlags()[3] = other.fieldSetFlags()[3];
+      }
+      if (isValidValue(fields()[4], other.usuario)) {
+        this.usuario = data().deepCopy(fields()[4].schema(), other.usuario);
+        fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
       if (other.hasUsuarioBuilder()) {
         this.usuarioBuilder = project.spring.avro.UsuarioPagamentoRequest.newBuilder(other.getUsuarioBuilder());
@@ -318,13 +350,18 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
         fieldSetFlags()[1] = true;
       }
       this.titularBuilder = null;
-      if (isValidValue(fields()[2], other.value)) {
-        this.value = data().deepCopy(fields()[2].schema(), other.value);
+      if (isValidValue(fields()[2], other.identificadorApiPrincipal)) {
+        this.identificadorApiPrincipal = data().deepCopy(fields()[2].schema(), other.identificadorApiPrincipal);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.usuario)) {
-        this.usuario = data().deepCopy(fields()[3].schema(), other.usuario);
+      this.identificadorApiPrincipalBuilder = null;
+      if (isValidValue(fields()[3], other.value)) {
+        this.value = data().deepCopy(fields()[3].schema(), other.value);
         fieldSetFlags()[3] = true;
+      }
+      if (isValidValue(fields()[4], other.usuario)) {
+        this.usuario = data().deepCopy(fields()[4].schema(), other.usuario);
+        fieldSetFlags()[4] = true;
       }
       this.usuarioBuilder = null;
     }
@@ -482,6 +519,82 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
     }
 
     /**
+      * Gets the value of the 'identificadorApiPrincipal' field.
+      * @return The value.
+      */
+    public project.spring.avro.IdentificadorApiPrincipalRequest getIdentificadorApiPrincipal() {
+      return identificadorApiPrincipal;
+    }
+
+
+    /**
+      * Sets the value of the 'identificadorApiPrincipal' field.
+      * @param value The value of 'identificadorApiPrincipal'.
+      * @return This builder.
+      */
+    public project.spring.avro.PagamentoRequest.Builder setIdentificadorApiPrincipal(project.spring.avro.IdentificadorApiPrincipalRequest value) {
+      validate(fields()[2], value);
+      this.identificadorApiPrincipalBuilder = null;
+      this.identificadorApiPrincipal = value;
+      fieldSetFlags()[2] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'identificadorApiPrincipal' field has been set.
+      * @return True if the 'identificadorApiPrincipal' field has been set, false otherwise.
+      */
+    public boolean hasIdentificadorApiPrincipal() {
+      return fieldSetFlags()[2];
+    }
+
+    /**
+     * Gets the Builder instance for the 'identificadorApiPrincipal' field and creates one if it doesn't exist yet.
+     * @return This builder.
+     */
+    public project.spring.avro.IdentificadorApiPrincipalRequest.Builder getIdentificadorApiPrincipalBuilder() {
+      if (identificadorApiPrincipalBuilder == null) {
+        if (hasIdentificadorApiPrincipal()) {
+          setIdentificadorApiPrincipalBuilder(project.spring.avro.IdentificadorApiPrincipalRequest.newBuilder(identificadorApiPrincipal));
+        } else {
+          setIdentificadorApiPrincipalBuilder(project.spring.avro.IdentificadorApiPrincipalRequest.newBuilder());
+        }
+      }
+      return identificadorApiPrincipalBuilder;
+    }
+
+    /**
+     * Sets the Builder instance for the 'identificadorApiPrincipal' field
+     * @param value The builder instance that must be set.
+     * @return This builder.
+     */
+
+    public project.spring.avro.PagamentoRequest.Builder setIdentificadorApiPrincipalBuilder(project.spring.avro.IdentificadorApiPrincipalRequest.Builder value) {
+      clearIdentificadorApiPrincipal();
+      identificadorApiPrincipalBuilder = value;
+      return this;
+    }
+
+    /**
+     * Checks whether the 'identificadorApiPrincipal' field has an active Builder instance
+     * @return True if the 'identificadorApiPrincipal' field has an active Builder instance
+     */
+    public boolean hasIdentificadorApiPrincipalBuilder() {
+      return identificadorApiPrincipalBuilder != null;
+    }
+
+    /**
+      * Clears the value of the 'identificadorApiPrincipal' field.
+      * @return This builder.
+      */
+    public project.spring.avro.PagamentoRequest.Builder clearIdentificadorApiPrincipal() {
+      identificadorApiPrincipal = null;
+      identificadorApiPrincipalBuilder = null;
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'value' field.
       * @return The value.
       */
@@ -496,9 +609,9 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
       * @return This builder.
       */
     public project.spring.avro.PagamentoRequest.Builder setValue(java.nio.ByteBuffer value) {
-      validate(fields()[2], value);
+      validate(fields()[3], value);
       this.value = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -507,7 +620,7 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
       * @return True if the 'value' field has been set, false otherwise.
       */
     public boolean hasValue() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[3];
     }
 
 
@@ -517,7 +630,7 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
       */
     public project.spring.avro.PagamentoRequest.Builder clearValue() {
       value = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -536,10 +649,10 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
       * @return This builder.
       */
     public project.spring.avro.PagamentoRequest.Builder setUsuario(project.spring.avro.UsuarioPagamentoRequest value) {
-      validate(fields()[3], value);
+      validate(fields()[4], value);
       this.usuarioBuilder = null;
       this.usuario = value;
-      fieldSetFlags()[3] = true;
+      fieldSetFlags()[4] = true;
       return this;
     }
 
@@ -548,7 +661,7 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
       * @return True if the 'usuario' field has been set, false otherwise.
       */
     public boolean hasUsuario() {
-      return fieldSetFlags()[3];
+      return fieldSetFlags()[4];
     }
 
     /**
@@ -593,7 +706,7 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
     public project.spring.avro.PagamentoRequest.Builder clearUsuario() {
       usuario = null;
       usuarioBuilder = null;
-      fieldSetFlags()[3] = false;
+      fieldSetFlags()[4] = false;
       return this;
     }
 
@@ -622,7 +735,17 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
         } else {
           record.titular = fieldSetFlags()[1] ? this.titular : (project.spring.avro.TitularCartaoCreditoRequest) defaultValue(fields()[1]);
         }
-        record.value = fieldSetFlags()[2] ? this.value : (java.nio.ByteBuffer) defaultValue(fields()[2]);
+        if (identificadorApiPrincipalBuilder != null) {
+          try {
+            record.identificadorApiPrincipal = this.identificadorApiPrincipalBuilder.build();
+          } catch (org.apache.avro.AvroMissingFieldException e) {
+            e.addParentField(record.getSchema().getField("identificadorApiPrincipal"));
+            throw e;
+          }
+        } else {
+          record.identificadorApiPrincipal = fieldSetFlags()[2] ? this.identificadorApiPrincipal : (project.spring.avro.IdentificadorApiPrincipalRequest) defaultValue(fields()[2]);
+        }
+        record.value = fieldSetFlags()[3] ? this.value : (java.nio.ByteBuffer) defaultValue(fields()[3]);
         if (usuarioBuilder != null) {
           try {
             record.usuario = this.usuarioBuilder.build();
@@ -631,7 +754,7 @@ public class PagamentoRequest extends org.apache.avro.specific.SpecificRecordBas
             throw e;
           }
         } else {
-          record.usuario = fieldSetFlags()[3] ? this.usuario : (project.spring.avro.UsuarioPagamentoRequest) defaultValue(fields()[3]);
+          record.usuario = fieldSetFlags()[4] ? this.usuario : (project.spring.avro.UsuarioPagamentoRequest) defaultValue(fields()[4]);
         }
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {

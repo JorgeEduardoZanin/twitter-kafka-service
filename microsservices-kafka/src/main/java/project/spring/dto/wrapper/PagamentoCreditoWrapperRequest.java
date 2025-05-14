@@ -11,5 +11,6 @@ public record PagamentoCreditoWrapperRequest(
     @Valid PagamentoCreditoRequest pagamentoCredito,
     @Valid TitularCartaoCreditoRequest titularCartao,
     @Valid UsuarioPagamentoRequest usuario,
-    @Valid BigDecimal value
+    @Valid BigDecimal value,
+    @Valid Long identificadorApiPrincipal
 ) {}

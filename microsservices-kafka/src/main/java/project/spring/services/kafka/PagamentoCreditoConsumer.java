@@ -20,7 +20,6 @@ import project.spring.services.PagamentoService;
 import project.spring.util.DecimalUtils;
 
 
-
 @Service
 public class PagamentoCreditoConsumer{
 
@@ -28,6 +27,8 @@ public class PagamentoCreditoConsumer{
 	
 	@Autowired
 	private PagamentoService service;
+
+    
 	
 	@KafkaListener(topics = "${spring.kafka.topico-assinatura-credito}", groupId = "${spring.kafka.consumer.credito.group-id}")
 	public void pagamentoCreditoConsumer(PagamentoRequest pagamento, Acknowledgment ack) throws IOException {
@@ -38,7 +39,9 @@ public class PagamentoCreditoConsumer{
 		UsuarioPagamentoRequest usuarioRequest = UsuarioPagamentoRequest.toUsuarioRequest(pagamento);
 		BigDecimal value  = DecimalUtils.toBigDecimal(pagamento.getValue(), 2);
 
-		PagamentoCreditoWrapperRequest  wrapper = new PagamentoCreditoWrapperRequest(creditoRequest, titularCartaoRequest, usuarioRequest, value);
+		System.out.println(pagamento.getIdentificadorApiPrincipal().getIdentificadorApiPrincipal()+" TESTE TESTESTETSADASDASDASD");
+		
+		PagamentoCreditoWrapperRequest  wrapper = new PagamentoCreditoWrapperRequest(creditoRequest, titularCartaoRequest, usuarioRequest, value, pagamento.getIdentificadorApiPrincipal().getIdentificadorApiPrincipal());
 		service.createPagamentoCredito(wrapper);
 			
 		ack.acknowledge();

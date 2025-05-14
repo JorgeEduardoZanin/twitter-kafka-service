@@ -17,12 +17,13 @@ public record PagamentoCreditoResponse(@JsonProperty("id") String id, @JsonPrope
 		@JsonProperty("billingType") String billingType) {
 
 	
-	public Pagamento toEntity(String usuarioId) {
+	public Pagamento toEntity(String usuarioId, Long idApiPrincipal) {
 		Pagamento pagamento = new Pagamento(this.customer, this.dueDate, this.value, this.billingType, this.status);
 		UsuarioPagamento usuario = new UsuarioPagamento();
 		usuario.setUsuarioId(usuarioId);
 		pagamento.setUsuario(usuario);
 		pagamento.setId(this.id);
+		pagamento.setIdApiPrincipal(idApiPrincipal);
 		return pagamento;
 	
 	}

@@ -77,18 +77,18 @@ public class PagamentoService {
 			var usuarioPagamento = usuarioPagamentoService.UsuarioPagamento(usuarioPagamentoRequest);
 			var responseCredito = pagamentoCredito.createPagamento(wrapper.pagamentoCredito(), wrapper.titularCartao(), usuarioPagamento.customer(), wrapper.value());
 			
-			pagamentoRepository.save(responseCredito.toEntity(wrapper.usuario().usuarioId()));
+			pagamentoRepository.save(responseCredito.toEntity(wrapper.usuario().usuarioId(), wrapper.identificadorApiPrincipal()));
 			
 			return responseCredito;
 		}
 		
 		var responseCredito = pagamentoCredito.createPagamento(wrapper.pagamentoCredito(), wrapper.titularCartao(), customer.get().getCustomer(), wrapper.value());
-		pagamentoRepository.save(responseCredito.toEntity(wrapper.usuario().usuarioId()));
+		pagamentoRepository.save(responseCredito.toEntity(wrapper.usuario().usuarioId(), wrapper.identificadorApiPrincipal()));
 		return responseCredito;
 	}
 	
 	public NotificacaoResponse getPagamentoCredito(Long identificadorApiPrincipal) {
-		var pagamento = pagamentoRepository.findByIdentificadorApiPrincipal(identificadorApiPrincipal);
+		var pagamento = pagamentoRepository.findByIdApiPrincipal(identificadorApiPrincipal);
 		return NotificacaoResponse.toResponse(pagamento.get());
 		
 	}
