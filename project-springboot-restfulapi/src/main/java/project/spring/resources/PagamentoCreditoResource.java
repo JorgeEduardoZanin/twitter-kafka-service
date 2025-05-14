@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
-
+import project.spring.dto.response.NotificacaoResponse;
 import project.spring.dto.wrapper.PagamentoRequestControllerWrapper;
 import project.spring.services.PagamentoCreditoService;
 
@@ -23,11 +23,11 @@ public class PagamentoCreditoResource {
 	
 	@PostMapping
 	@PreAuthorize("hasAuthority('SCOPE_BASIC')")
-	public ResponseEntity<String> pagamentoCredito(@RequestBody @Valid PagamentoRequestControllerWrapper request, JwtAuthenticationToken token){
+	public ResponseEntity<NotificacaoResponse> pagamentoCredito(@RequestBody @Valid PagamentoRequestControllerWrapper request, JwtAuthenticationToken token) throws InterruptedException{
 			
 		System.out.println("tenta executar" +request);
 		
-		String pagamento  = service.signature(request.cartaoRequest(), request.titularRequest(), token);
+		NotificacaoResponse pagamento  = service.signature(request.cartaoRequest(), request.titularRequest(), token);
 		
 		return ResponseEntity.ok(pagamento); 
 		

@@ -13,6 +13,7 @@ import project.spring.dto.response.PagamentoPixResponse;
 import project.spring.dto.wrapper.PagamentoCreditoWrapperRequest;
 import project.spring.repository.PagamentoRepository;
 import project.spring.repository.UsuarioPagamentoRepository;
+import project.spring.services.kafka.NotificacaoPagamentoProducer;
 import project.spring.services.pagamento.PagamentoCreditoApi;
 import project.spring.services.pagamento.PagamentoPixApi;
 
@@ -35,7 +36,8 @@ public class PagamentoService {
 	@Autowired
 	private UsuarioPagamentoRepository usuarioPagamentoRepository;
 	
-	
+	@Autowired
+	private NotificacaoPagamentoProducer producer;
 	
 
 	public PagamentoPixResponse createPagamentoPix(PagamentoPixRequest request) throws IOException {
@@ -69,7 +71,7 @@ public class PagamentoService {
 		
 	}
 	
-	public PagamentoCreditoResponse createPagamentoCredito(PagamentoCreditoWrapperRequest wrapper) throws IOException {
+	public void createPagamentoCredito(PagamentoCreditoWrapperRequest wrapper) throws IOException {
 		var customer = usuarioPagamentoRepository.findByUsuarioId(wrapper.usuario().usuarioId());
 	
 		if(customer.isEmpty()) {
@@ -78,19 +80,18 @@ public class PagamentoService {
 			var responseCredito = pagamentoCredito.createPagamento(wrapper.pagamentoCredito(), wrapper.titularCartao(), usuarioPagamento.customer(), wrapper.value());
 			
 			pagamentoRepository.save(responseCredito.toEntity(wrapper.usuario().usuarioId(), wrapper.identificadorApiPrincipal()));
-			
-			return responseCredito;
+			return;
 		}
 		
 		var responseCredito = pagamentoCredito.createPagamento(wrapper.pagamentoCredito(), wrapper.titularCartao(), customer.get().getCustomer(), wrapper.value());
 		pagamentoRepository.save(responseCredito.toEntity(wrapper.usuario().usuarioId(), wrapper.identificadorApiPrincipal()));
-		return responseCredito;
+		return;
 	}
 	
 	public NotificacaoResponse getPagamentoCredito(Long identificadorApiPrincipal) {
 		var pagamento = pagamentoRepository.findByIdApiPrincipal(identificadorApiPrincipal);
-		return NotificacaoResponse.toResponse(pagamento.get());
-		
+		var usuarioPagamento = usuarioPagamentoRepository.findByCustomer(pagamento.get().getCustomer());
+		return NotificacaoResponse.toResponse(pagamento.get(), usuarioPagamento.get());
 	}
 			
 }

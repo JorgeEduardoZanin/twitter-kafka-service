@@ -6,9 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
+import project.spring.dto.response.NotificacaoResponse;
+import project.spring.entities.Pagamento;
+import project.spring.entities.UsuarioPagamento;
 import project.spring.enums.StatusEventoPagamento;
 import project.spring.enums.StatusPagamento;
 import project.spring.repository.PagamentoRepository;
+import project.spring.repository.UsuarioPagamentoRepository;
+import project.spring.services.kafka.NotificacaoPagamentoProducer;
 import project.spring.util.DataExpiracaoLogical;
 
 
@@ -19,7 +24,13 @@ public class NotificacaoWebhookPagamentoService {
 	private PagamentoRepository repository;	
 	
 	@Autowired
+	private UsuarioPagamentoRepository usuarioPagamentoRepository;	
+	
+	@Autowired
 	private DataExpiracaoLogical logicalExpiracao;
+	
+	@Autowired
+	private NotificacaoPagamentoProducer producer;
 	
 	
 	public void  notificacaoPagamento(Map<String, Object> body) {
@@ -45,8 +56,9 @@ public class NotificacaoWebhookPagamentoService {
 		if(statusPagamento == StatusPagamento.CONFIRMED && statusEvento == StatusEventoPagamento.PAYMENT_CONFIRMED) {
 			logicalExpiracao.dataExpiracao(pag.getUsuario().getUsuarioId());
 			}
-		
+		var usuario = usuarioPagamentoRepository.findByCustomer(pag.getCustomer());
+		producer.enviarMensagem(NotificacaoResponse.toAvro(pag, usuario.get()));
 	}
-	
+
 	
 }

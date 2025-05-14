@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.EntityNotFoundException;
+import project.spring.entities.UsuarioPagamento;
 import project.spring.repository.UsuarioPagamentoRepository;
 
 @Component
@@ -14,7 +15,7 @@ public class DataExpiracaoLogical {
 	@Autowired
 	private UsuarioPagamentoRepository repository;
 	
-	public void dataExpiracao(String usuarioId) {
+	public UsuarioPagamento dataExpiracao(String usuarioId) {
 		 var usuario = repository.findPagamentoNaoExpirado(usuarioId)
 		            .map(u -> {
 		                u.setExpiracaoAssinatura(
@@ -34,6 +35,7 @@ public class DataExpiracaoLogical {
 		            );
 		
 		repository.saveAndFlush(usuario);
+		return usuario;
 	}
 	
 	public LocalDate dataExpiracaoNula() {

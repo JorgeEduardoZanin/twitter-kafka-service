@@ -3,11 +3,15 @@ package project.spring.entities;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import project.spring.enums.StatusPagamento;
 
@@ -24,10 +28,27 @@ public class NotificacaoPagamento {
 	
 	private StatusPagamento status;
 	private LocalDate  dataExpiracaoAssinatura;
-	private String chavePixString;
+	private String chavePix;
 	private String tipoPagamento;
 	private LocalDate dataExpiracaoPagamento;
 	
+	@ManyToOne
+	@JoinColumn(name="usuario_id")
+	@JsonBackReference
+	private Usuario usuario;
+	
+	public NotificacaoPagamento(Long id, String idPagamento, StatusPagamento status, LocalDate dataExpiracaoAssinatura,
+			String chavePix, String tipoPagamento, LocalDate dataExpiracaoPagamento, Usuario usuario) {
+		this.idPagamento = idPagamento;
+		this.status = status;
+		this.dataExpiracaoAssinatura = dataExpiracaoAssinatura;
+		this.chavePix = chavePix;
+		this.tipoPagamento = tipoPagamento;
+		this.dataExpiracaoPagamento = dataExpiracaoPagamento;
+		this.id = id;
+		this.usuario = usuario;
+	}
+
 	public NotificacaoPagamento() {
 	}
 
@@ -63,12 +84,12 @@ public class NotificacaoPagamento {
 		this.dataExpiracaoAssinatura = dataExpiracaoAssinatura;
 	}
 
-	public String getChavePixString() {
-		return chavePixString;
+	public String getChavePix() {
+		return chavePix;
 	}
 
-	public void setChavePixString(String chavePixString) {
-		this.chavePixString = chavePixString;
+	public void setChavePix(String chavePixString) {
+		this.chavePix = chavePixString;
 	}
 
 	public String getTipoPagamento() {

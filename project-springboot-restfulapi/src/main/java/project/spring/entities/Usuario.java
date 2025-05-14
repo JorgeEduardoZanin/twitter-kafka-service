@@ -1,6 +1,7 @@
 package project.spring.entities;
 
 import java.io.Serial;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -55,6 +56,11 @@ public class Usuario implements UserDetails {
 	private String email;
 	private Integer idade;
 	private String password;
+	private LocalDate dataExpiracaoAssinatura;
+	
+	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private List<NotificacaoPagamento> notificacoes;
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<Telefone> telList;
@@ -166,6 +172,30 @@ public class Usuario implements UserDetails {
 
 	public void setPrimeiraCobranca(boolean primeiraCobranca) {
 		this.primeiraCobranca = primeiraCobranca;
+	}
+
+
+
+	public LocalDate getDataExpiracaoAssinatura() {
+		return dataExpiracaoAssinatura;
+	}
+
+
+
+	public void setDataExpiracaoAssinatura(LocalDate dataExpiracaoAssinatura) {
+		this.dataExpiracaoAssinatura = dataExpiracaoAssinatura;
+	}
+
+
+
+	public List<NotificacaoPagamento> getNotificacoes() {
+		return notificacoes;
+	}
+
+
+
+	public void setNotificacoes(List<NotificacaoPagamento> notificacoes) {
+		this.notificacoes = notificacoes;
 	}
 
 

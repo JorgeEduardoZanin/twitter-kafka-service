@@ -9,10 +9,11 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.stereotype.Service;
 
 
-
 import project.spring.dto.request.CartaoCreditoRequest;
+import project.spring.dto.request.IdentificadorApiPrincipalRequest;
 import project.spring.dto.request.TitularCartaoCreditoRequest;
 import project.spring.dto.request.UsuarioPagamentoRequest;
+import project.spring.dto.response.NotificacaoResponse;
 import project.spring.dto.wrapper.PagamentoRequest;
 import project.spring.entities.NotificacaoPagamento;
 import project.spring.enums.StatusPagamento;
@@ -30,12 +31,16 @@ public class PagamentoCreditoService {
 	private PagamentoCreditoProducer producer;
 	
 	@Autowired
+	NotificacaoService notificacaoService;
+	
+	@Autowired
 	private UsuarioRepository repository;
 	
 	@Autowired
 	private NotificacaoPagamentoRepository notificacaoPagamentoRepository;
 	
-	public String signature(CartaoCreditoRequest cartaoRequest, TitularCartaoCreditoRequest titularCartaoRequest, JwtAuthenticationToken token) {
+	
+	public NotificacaoResponse signature(CartaoCreditoRequest cartaoRequest, TitularCartaoCreditoRequest titularCartaoRequest, JwtAuthenticationToken token) throws InterruptedException {
 		var usuario = repository.findById(UUID.fromString(token.getName())).get();
 	
 		UsuarioPagamentoRequest usuarioRequest = new UsuarioPagamentoRequest(usuario.getId().toString(), usuario.getCpf_cnpj(), usuario.getNome());
@@ -43,13 +48,17 @@ public class PagamentoCreditoService {
 		NotificacaoPagamento notPagamento = new NotificacaoPagamento();
 		notPagamento.setStatus(StatusPagamento.PENDING);
 		notificacaoPagamentoRepository.save(notPagamento);
-		notPagamento.getId();
+
 		
-		
+		PagamentoRequest request = new PagamentoRequest(cartaoRequest, titularCartaoRequest, assinaturaValor, usuarioRequest, new IdentificadorApiPrincipalRequest(notPagamento.getId()) );
 	
 		producer.enviarMensagem(request.toAvro());
 		
-		return "pagamento inicializado";
+		Thread.sleep(5000);
+	
+	
+		return notificacaoService.getNotificacao(notPagamento.getId(), usuario);
+		
 	}
 	
 }
