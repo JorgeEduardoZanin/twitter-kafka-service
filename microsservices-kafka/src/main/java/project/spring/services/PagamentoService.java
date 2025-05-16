@@ -8,12 +8,10 @@ import org.springframework.stereotype.Service;
 import project.spring.dto.request.PagamentoPixRequest;
 import project.spring.dto.request.UsuarioPagamentoRequest;
 import project.spring.dto.response.NotificacaoResponse;
-import project.spring.dto.response.PagamentoCreditoResponse;
 import project.spring.dto.response.PagamentoPixResponse;
 import project.spring.dto.wrapper.PagamentoCreditoWrapperRequest;
 import project.spring.repository.PagamentoRepository;
 import project.spring.repository.UsuarioPagamentoRepository;
-import project.spring.services.kafka.NotificacaoPagamentoProducer;
 import project.spring.services.pagamento.PagamentoCreditoApi;
 import project.spring.services.pagamento.PagamentoPixApi;
 
@@ -36,10 +34,6 @@ public class PagamentoService {
 	@Autowired
 	private UsuarioPagamentoRepository usuarioPagamentoRepository;
 	
-	@Autowired
-	private NotificacaoPagamentoProducer producer;
-	
-
 	public PagamentoPixResponse createPagamentoPix(PagamentoPixRequest request) throws IOException {
 		var customer = usuarioPagamentoRepository.findByUsuarioId("cus_000006682352");
 		
@@ -74,7 +68,7 @@ public class PagamentoService {
 	public void createPagamentoCredito(PagamentoCreditoWrapperRequest wrapper) throws IOException {
 		var customer = usuarioPagamentoRepository.findByUsuarioId(wrapper.usuario().usuarioId());
 	
-		if(customer.isEmpty()) {
+		if(customer.isEmpty() || wrapper.usuario().cpf_cnpj() != null) {
 			UsuarioPagamentoRequest usuarioPagamentoRequest = new UsuarioPagamentoRequest(wrapper.usuario().usuarioId(), wrapper.usuario().cpf_cnpj(), wrapper.usuario().nome());
 			var usuarioPagamento = usuarioPagamentoService.UsuarioPagamento(usuarioPagamentoRequest);
 			var responseCredito = pagamentoCredito.createPagamento(wrapper.pagamentoCredito(), wrapper.titularCartao(), usuarioPagamento.customer(), wrapper.value());

@@ -85,4 +85,6 @@ public class UsuarioPagamento {
 	public void setExpiracaoAssinatura(LocalDate expiracaoAssinatura) {
 		this.expiracaoAssinatura = expiracaoAssinatura;
 	}
+
+	
 }

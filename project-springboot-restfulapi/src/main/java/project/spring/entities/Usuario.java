@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,6 +26,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import project.spring.dto.request.LoginRequest;
+import project.spring.enums.StatusPagamento;
 
 
 @Entity
@@ -44,7 +46,8 @@ public class Usuario implements UserDetails {
 	@Column(name = "cpf_cnpj", unique = true, nullable = false, length = 14)
 	private String cpf_cnpj;
 	
-	@Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
+	@Column(nullable = false)
+	@ColumnDefault("true")
 	private boolean primeiraCobranca;
 	
 	
@@ -214,6 +217,18 @@ public class Usuario implements UserDetails {
 	
 	public boolean isLoginCorrect(LoginRequest loginRequest, PasswordEncoder passwordEncoder) {
 		return passwordEncoder.matches(loginRequest.password(), this.password);
+	}
+	
+	public void usuarioAssinatura(StatusPagamento status, LocalDate dataExpiracaoAssinatura) {
+		if (status != StatusPagamento.CONFIRMED) {
+            return;
+        }
+        if (dataExpiracaoAssinatura == null || dataExpiracaoAssinatura.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Data de expiração deve ser futura e o pagamento deve ser confirmado para a data existir.");
+        }
+        
+        this.assinante = true;
+        this.dataExpiracaoAssinatura = dataExpiracaoAssinatura;
 	}
 	
 }

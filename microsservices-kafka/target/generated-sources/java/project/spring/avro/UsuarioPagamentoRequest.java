@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -8420793803915345690L;
+  private static final long serialVersionUID = 7312309816544296269L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UsuarioPagamentoRequest\",\"namespace\":\"project.spring.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"nome\",\"type\":\"string\"},{\"name\":\"cpf_cnpj\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"UsuarioPagamentoRequest\",\"namespace\":\"project.spring.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"nome\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"cpf_cnpj\",\"type\":[\"null\",\"string\"],\"default\":null}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -428,9 +428,21 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
   {
     out.writeString(this.id);
 
-    out.writeString(this.nome);
+    if (this.nome == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.nome);
+    }
 
-    out.writeString(this.cpf_cnpj);
+    if (this.cpf_cnpj == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.cpf_cnpj);
+    }
 
   }
 
@@ -441,9 +453,19 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
     if (fieldOrder == null) {
       this.id = in.readString(this.id instanceof Utf8 ? (Utf8)this.id : null);
 
-      this.nome = in.readString(this.nome instanceof Utf8 ? (Utf8)this.nome : null);
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.nome = null;
+      } else {
+        this.nome = in.readString(this.nome instanceof Utf8 ? (Utf8)this.nome : null);
+      }
 
-      this.cpf_cnpj = in.readString(this.cpf_cnpj instanceof Utf8 ? (Utf8)this.cpf_cnpj : null);
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.cpf_cnpj = null;
+      } else {
+        this.cpf_cnpj = in.readString(this.cpf_cnpj instanceof Utf8 ? (Utf8)this.cpf_cnpj : null);
+      }
 
     } else {
       for (int i = 0; i < 3; i++) {
@@ -453,11 +475,21 @@ public class UsuarioPagamentoRequest extends org.apache.avro.specific.SpecificRe
           break;
 
         case 1:
-          this.nome = in.readString(this.nome instanceof Utf8 ? (Utf8)this.nome : null);
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.nome = null;
+          } else {
+            this.nome = in.readString(this.nome instanceof Utf8 ? (Utf8)this.nome : null);
+          }
           break;
 
         case 2:
-          this.cpf_cnpj = in.readString(this.cpf_cnpj instanceof Utf8 ? (Utf8)this.cpf_cnpj : null);
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.cpf_cnpj = null;
+          } else {
+            this.cpf_cnpj = in.readString(this.cpf_cnpj instanceof Utf8 ? (Utf8)this.cpf_cnpj : null);
+          }
           break;
 
         default:

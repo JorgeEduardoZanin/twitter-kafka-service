@@ -17,6 +17,19 @@ public record NotificacaoResponse(Long id, String usuarioId, StatusPagamento sta
 	}
 	
 	public static NotificacaoPagamento toAvro(Pagamento pagamento, UsuarioPagamento usuarioPagamento) {
+		if(usuarioPagamento.getExpiracaoAssinatura()==null) {
+			return NotificacaoPagamento.newBuilder()
+					.setBillingType(pagamento.getBillingType())
+					.setId(pagamento.getIdApiPrincipal())
+					.setChavePix(pagamento.getChavePix())
+					.setDataExpiracaoAssinatura(usuarioPagamento.getExpiracaoAssinatura() != null ? usuarioPagamento.getExpiracaoAssinatura().toString() : null)
+					.setDataExpiracaoPagamento(pagamento.getDueDate().toString())
+					.setStatus(pagamento.getStatus().toString())
+					.setPaymentId(pagamento.getId())
+					.setUsuarioId(usuarioPagamento.getUsuarioId())
+					.build();
+		}
+		
 		return NotificacaoPagamento.newBuilder()
 				.setBillingType(pagamento.getBillingType())
 				.setId(pagamento.getIdApiPrincipal())

@@ -16,7 +16,7 @@ import project.spring.dto.request.UsuarioPagamentoRequest;
 import project.spring.dto.response.NotificacaoResponse;
 import project.spring.dto.wrapper.PagamentoRequest;
 import project.spring.entities.NotificacaoPagamento;
-import project.spring.enums.StatusPagamento;
+
 import project.spring.repository.NotificacaoPagamentoRepository;
 import project.spring.repository.UsuarioRepository;
 import project.spring.services.kafka.producer.PagamentoCreditoProducer;
@@ -42,21 +42,21 @@ public class PagamentoCreditoService {
 	
 	public NotificacaoResponse signature(CartaoCreditoRequest cartaoRequest, TitularCartaoCreditoRequest titularCartaoRequest, JwtAuthenticationToken token) throws InterruptedException {
 		var usuario = repository.findById(UUID.fromString(token.getName())).get();
-	
-		UsuarioPagamentoRequest usuarioRequest = new UsuarioPagamentoRequest(usuario.getId().toString(), usuario.getCpf_cnpj(), usuario.getNome());
+		UsuarioPagamentoRequest usuarioRequest = new UsuarioPagamentoRequest(usuario.getId().toString(), null, null);
 		
-		NotificacaoPagamento notPagamento = new NotificacaoPagamento();
-		notPagamento.setStatus(StatusPagamento.PENDING);
+		if(usuario.isPrimeiraCobranca()) {
+			 usuarioRequest = new UsuarioPagamentoRequest(usuario.getId().toString(), usuario.getCpf_cnpj(), usuario.getNome());
+			 usuario.setPrimeiraCobranca(false);
+			 repository.saveAndFlush(usuario);
+		}
+		
+		NotificacaoPagamento notPagamento = NotificacaoPagamento.newNotificacao();
 		notificacaoPagamentoRepository.save(notPagamento);
-
 		
 		PagamentoRequest request = new PagamentoRequest(cartaoRequest, titularCartaoRequest, assinaturaValor, usuarioRequest, new IdentificadorApiPrincipalRequest(notPagamento.getId()) );
 	
 		producer.enviarMensagem(request.toAvro());
-		
-		Thread.sleep(5000);
-	
-	
+
 		return notificacaoService.getNotificacao(notPagamento.getId(), usuario);
 		
 	}

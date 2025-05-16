@@ -38,8 +38,6 @@ public class PagamentoCreditoConsumer{
 		TitularCartaoCreditoRequest titularCartaoRequest = TitularCartaoCreditoRequest.toTitularCartaoRequest(pagamento);
 		UsuarioPagamentoRequest usuarioRequest = UsuarioPagamentoRequest.toUsuarioRequest(pagamento);
 		BigDecimal value  = DecimalUtils.toBigDecimal(pagamento.getValue(), 2);
-
-		System.out.println(pagamento.getIdentificadorApiPrincipal().getIdentificadorApiPrincipal()+" TESTE TESTESTETSADASDASDASD");
 		
 		PagamentoCreditoWrapperRequest  wrapper = new PagamentoCreditoWrapperRequest(creditoRequest, titularCartaoRequest, usuarioRequest, value, pagamento.getIdentificadorApiPrincipal().getIdentificadorApiPrincipal());
 		service.createPagamentoCredito(wrapper);

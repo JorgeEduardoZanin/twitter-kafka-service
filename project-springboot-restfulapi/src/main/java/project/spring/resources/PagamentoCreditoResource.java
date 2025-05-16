@@ -25,7 +25,7 @@ public class PagamentoCreditoResource {
 	@PreAuthorize("hasAuthority('SCOPE_BASIC')")
 	public ResponseEntity<NotificacaoResponse> pagamentoCredito(@RequestBody @Valid PagamentoRequestControllerWrapper request, JwtAuthenticationToken token) throws InterruptedException{
 			
-		System.out.println("tenta executar" +request);
+	
 		
 		NotificacaoResponse pagamento  = service.signature(request.cartaoRequest(), request.titularRequest(), token);
 		

@@ -37,7 +37,7 @@ public class DataExpiracaoLogical {
 		repository.saveAndFlush(usuario);
 		return usuario;
 	}
-	
+	 
 	public LocalDate dataExpiracaoNula() {
 		return LocalDate.now().plusMonths(1);
 	}

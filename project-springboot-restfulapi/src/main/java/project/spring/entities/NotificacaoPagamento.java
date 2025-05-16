@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,11 +28,16 @@ public class NotificacaoPagamento {
 	@Column(unique = true)
 	private String idPagamento;
 	
+	@Enumerated(EnumType.STRING)
 	private StatusPagamento status;
+	
 	private LocalDate  dataExpiracaoAssinatura;
+	private LocalDate dataExpiracaoPagamento;
+	
 	private String chavePix;
 	private String tipoPagamento;
-	private LocalDate dataExpiracaoPagamento;
+	
+	
 	
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
@@ -108,6 +115,10 @@ public class NotificacaoPagamento {
 		this.dataExpiracaoPagamento = dataExpiracaoPagamento;
 	}
 	
-	
+	public static NotificacaoPagamento newNotificacao() {
+		NotificacaoPagamento not = new NotificacaoPagamento();
+		not.setStatus(StatusPagamento.PENDING);
+		return not;	
+	}
 	
 }

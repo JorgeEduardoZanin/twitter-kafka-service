@@ -19,7 +19,5 @@ public enum StatusPagamento {
     CHECKOUT_VIEWED,
     SPLIT_DIVERGENCE_BLOCK,
     SPLIT_DIVERGENCE_BLOCK_FINISHED;
-
-
-
+	
 }

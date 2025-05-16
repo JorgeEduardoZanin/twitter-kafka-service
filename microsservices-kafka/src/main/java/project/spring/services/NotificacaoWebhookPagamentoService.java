@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
 import project.spring.dto.response.NotificacaoResponse;
-import project.spring.entities.Pagamento;
-import project.spring.entities.UsuarioPagamento;
 import project.spring.enums.StatusEventoPagamento;
 import project.spring.enums.StatusPagamento;
 import project.spring.repository.PagamentoRepository;
@@ -42,11 +40,8 @@ public class NotificacaoWebhookPagamentoService {
 		StatusPagamento statusPagamento = StatusPagamento.valueOf(payment.get("status").toString());
 		StatusEventoPagamento statusEvento = StatusEventoPagamento.valueOf(asaasEvent);
 		
-		System.out.println(payment.get("status").toString());
 		var pag = repository.findById(payment.get("id").toString())
 				.orElseThrow(() -> new EntityNotFoundException("Pagamento não encontrado para ID " + payment.get("id").toString()));
-		
-		
 		
 		pag.setId(pag.getId());
 		pag.setStatus(statusPagamento.name());

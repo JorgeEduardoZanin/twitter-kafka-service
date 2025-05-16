@@ -18,6 +18,7 @@ public class PagamentoCreditoProducer {
     private KafkaTemplate<String, PagamentoRequest> kafkaTemplate;
 
     public void enviarMensagem(PagamentoRequest pagamentoRequest) {
+    	System.out.println(pagamentoRequest);
         kafkaTemplate.send(topico, pagamentoRequest);
     }
  

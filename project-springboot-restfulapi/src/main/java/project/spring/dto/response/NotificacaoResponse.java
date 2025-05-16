@@ -25,7 +25,7 @@ public record NotificacaoResponse(Long id, UUID usuarioId, StatusPagamento statu
 		return new NotificacaoPagamento(notificacao.getId(),
 				notificacao.getPaymentId().toString(),
 				StatusPagamento.valueOf(notificacao.getStatus().toString()),
-				LocalDate.parse(notificacao.getDataExpiracaoAssinatura()),
+				notificacao.getDataExpiracaoAssinatura()==null ? LocalDate.parse(notificacao.getDataExpiracaoAssinatura()):null,
 				notificacao.getChavePix() != null ? notificacao.getChavePix().toString() : "",
 				notificacao.getBillingType().toString(),
 				LocalDate.parse(notificacao.getDataExpiracaoPagamento()), 

@@ -117,5 +117,9 @@ public class Pagamento {
 	public void setIdApiPrincipal(Long idApiPrincipal) {
 		this.idApiPrincipal = idApiPrincipal;
 	}
+
+	
+	
+	
 	
 }

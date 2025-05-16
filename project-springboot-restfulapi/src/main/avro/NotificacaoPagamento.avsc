@@ -12,8 +12,8 @@
       "type": ["null", "string"], 
       "default": null 
     },
-    { "name":"dataExpiracaoAssinatura",  	"type": "string" },
-    { "name":"dataExpiracaoPagamento",  	"type": "string" },
+    { "name":"dataExpiracaoAssinatura", "type": ["null", "string"], "default": null},
+    { "name":"dataExpiracaoPagamento", "type": "string"},
     { "name": "status",         "type": "string" }
     
   ]

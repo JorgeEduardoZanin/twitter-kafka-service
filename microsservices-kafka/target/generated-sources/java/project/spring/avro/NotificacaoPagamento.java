@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -4137506032192365060L;
+  private static final long serialVersionUID = -7128973641839250560L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NotificacaoPagamento\",\"namespace\":\"project.spring.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"long\"},{\"name\":\"usuarioId\",\"type\":\"string\"},{\"name\":\"paymentId\",\"type\":\"string\"},{\"name\":\"billingType\",\"type\":\"string\"},{\"name\":\"chavePix\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"dataExpiracaoAssinatura\",\"type\":\"string\"},{\"name\":\"dataExpiracaoPagamento\",\"type\":\"string\"},{\"name\":\"status\",\"type\":\"string\"}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"NotificacaoPagamento\",\"namespace\":\"project.spring.avro\",\"fields\":[{\"name\":\"id\",\"type\":\"long\"},{\"name\":\"usuarioId\",\"type\":\"string\"},{\"name\":\"paymentId\",\"type\":\"string\"},{\"name\":\"billingType\",\"type\":\"string\"},{\"name\":\"chavePix\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"dataExpiracaoAssinatura\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"dataExpiracaoPagamento\",\"type\":\"string\"},{\"name\":\"status\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -801,7 +801,13 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
       out.writeString(this.chavePix);
     }
 
-    out.writeString(this.dataExpiracaoAssinatura);
+    if (this.dataExpiracaoAssinatura == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.dataExpiracaoAssinatura);
+    }
 
     out.writeString(this.dataExpiracaoPagamento);
 
@@ -829,7 +835,12 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
         this.chavePix = in.readString(this.chavePix instanceof Utf8 ? (Utf8)this.chavePix : null);
       }
 
-      this.dataExpiracaoAssinatura = in.readString(this.dataExpiracaoAssinatura instanceof Utf8 ? (Utf8)this.dataExpiracaoAssinatura : null);
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.dataExpiracaoAssinatura = null;
+      } else {
+        this.dataExpiracaoAssinatura = in.readString(this.dataExpiracaoAssinatura instanceof Utf8 ? (Utf8)this.dataExpiracaoAssinatura : null);
+      }
 
       this.dataExpiracaoPagamento = in.readString(this.dataExpiracaoPagamento instanceof Utf8 ? (Utf8)this.dataExpiracaoPagamento : null);
 
@@ -864,7 +875,12 @@ public class NotificacaoPagamento extends org.apache.avro.specific.SpecificRecor
           break;
 
         case 5:
-          this.dataExpiracaoAssinatura = in.readString(this.dataExpiracaoAssinatura instanceof Utf8 ? (Utf8)this.dataExpiracaoAssinatura : null);
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.dataExpiracaoAssinatura = null;
+          } else {
+            this.dataExpiracaoAssinatura = in.readString(this.dataExpiracaoAssinatura instanceof Utf8 ? (Utf8)this.dataExpiracaoAssinatura : null);
+          }
           break;
 
         case 6:

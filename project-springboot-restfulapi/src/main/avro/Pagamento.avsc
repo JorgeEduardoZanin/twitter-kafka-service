@@ -58,8 +58,8 @@
         "name": "UsuarioPagamentoRequest",
         "fields": [
           { "name": "id",        "type": "string" },
-          { "name": "nome",      "type": "string" },
-          { "name": "cpf_cnpj",  "type": "string" }
+          { "name": "nome",      "type": ["null","string"], "default":null },
+          { "name": "cpf_cnpj",  "type": ["null","string"], "default":null }
         ]
       }
     }
