@@ -7,11 +7,9 @@ import org.springframework.stereotype.Service;
 
 import project.spring.dto.request.PagamentoPixRequest;
 import project.spring.dto.request.UsuarioPagamentoRequest;
-import project.spring.dto.response.NotificacaoResponse;
 import project.spring.dto.response.PagamentoPixResponse;
 import project.spring.repository.PagamentoRepository;
 import project.spring.repository.UsuarioPagamentoRepository;
-import project.spring.services.kafka.producer.NotificacaoPagamentoProducer;
 import project.spring.services.pagamento.PagamentoPixApi;
 
 @Service

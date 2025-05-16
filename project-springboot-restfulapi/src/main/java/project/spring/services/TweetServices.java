@@ -48,9 +48,12 @@ public class TweetServices {
 	 *
 	 */
 	public Tweet createTweet(Tweet tweet, JwtAuthenticationToken token) {
-		Usuario usuario = new Usuario();
-		usuario.setId(UUID.fromString(token.getName()));
-		tweet.setUsuario(usuario);
+	
+		var usuario = usuarioRepository.findById(UUID.fromString(token.getName()));
+		if (!usuario.get().isAssinante() && tweet.getContent().length() > 100) {
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Usuário não é assinante premium.");
+		}
+		tweet.setUsuario(usuario.get());
 		return repository.save(tweet);
 		
 		
