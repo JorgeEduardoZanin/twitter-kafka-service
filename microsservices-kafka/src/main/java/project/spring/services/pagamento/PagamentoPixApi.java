@@ -35,7 +35,7 @@ public class PagamentoPixApi {
 			  .setHeader("accept", "application/json")
 			  .setHeader("content-type", "application/json")
 			  .setHeader("access_token", API_KEY)
-			  .setBody("{\"billingType\":\"PIX\",\"customer\":\""+customer+"\",\"value\":"+request.amount()+",\"dueDate\":\""+date+"\"}")
+			  .setBody("{\"billingType\":\"PIX\",\"customer\":\""+customer+"\",\"value\":"+request.valor()+",\"dueDate\":\""+date+"\"}")
 			  .execute()
 			  .toCompletableFuture()
 			  .join();

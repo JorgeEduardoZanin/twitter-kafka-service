@@ -1,5 +1,5 @@
 
-package project.spring.services.kafka;
+package project.spring.services.kafka.producer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

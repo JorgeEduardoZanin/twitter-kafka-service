@@ -11,7 +11,7 @@ import project.spring.enums.StatusEventoPagamento;
 import project.spring.enums.StatusPagamento;
 import project.spring.repository.PagamentoRepository;
 import project.spring.repository.UsuarioPagamentoRepository;
-import project.spring.services.kafka.NotificacaoPagamentoProducer;
+import project.spring.services.kafka.producer.NotificacaoPagamentoProducer;
 import project.spring.util.DataExpiracaoLogical;
 
 
@@ -48,11 +48,12 @@ public class NotificacaoWebhookPagamentoService {
 		
 		repository.saveAndFlush(pag);
 		
-		if(statusPagamento == StatusPagamento.CONFIRMED && statusEvento == StatusEventoPagamento.PAYMENT_CONFIRMED) {
+		if(statusPagamento == StatusPagamento.CONFIRMED && statusEvento == StatusEventoPagamento.PAYMENT_CONFIRMED ||
+				statusPagamento == StatusPagamento.RECEIVED && statusEvento == StatusEventoPagamento.PAYMENT_RECEIVED) {
 			logicalExpiracao.dataExpiracao(pag.getUsuario().getUsuarioId());
 			}
 		var usuario = usuarioPagamentoRepository.findByCustomer(pag.getCustomer());
-		producer.enviarMensagem(NotificacaoResponse.toAvro(pag, usuario.get()));
+		producer.enviarMensagem(NotificacaoResponse.creditoToAvro(pag, usuario.get()));
 	}
 
 	

@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import project.spring.dto.request.UsuarioPagamentoRequest;
 import project.spring.dto.request.UsuarioRequest;
 import project.spring.entities.Role;
 import project.spring.entities.Usuario;
@@ -89,7 +90,22 @@ public class UsuarioServices {
 		repository.deleteById(id);
 		return "Usuario deletado com sucesso!";
 	}
-	
-	
+	/*
+	 *
+	 * 
+	 SERVICES DE LOGICAS
+	 *
+	 *
+	 */
+	public UsuarioPagamentoRequest verificaPrimeiraCobranca(Usuario usuario) {
+		UsuarioPagamentoRequest usuarioRequest = new UsuarioPagamentoRequest(usuario.getId().toString(), null, null);
+		
+		if(usuario.isPrimeiraCobranca()) {
+			 usuarioRequest = new UsuarioPagamentoRequest(usuario.getId().toString(), usuario.getCpf_cnpj(), usuario.getNome());
+			 usuario.setPrimeiraCobranca(false);
+			 repository.saveAndFlush(usuario);
+		}
+		return usuarioRequest;
+		}
 
 }

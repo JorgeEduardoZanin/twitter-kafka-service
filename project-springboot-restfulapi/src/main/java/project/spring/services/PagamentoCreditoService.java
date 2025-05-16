@@ -10,14 +10,11 @@ import org.springframework.stereotype.Service;
 
 
 import project.spring.dto.request.CartaoCreditoRequest;
-import project.spring.dto.request.IdentificadorApiPrincipalRequest;
 import project.spring.dto.request.TitularCartaoCreditoRequest;
-import project.spring.dto.request.UsuarioPagamentoRequest;
 import project.spring.dto.response.NotificacaoResponse;
 import project.spring.dto.wrapper.PagamentoRequest;
-import project.spring.entities.NotificacaoPagamento;
 
-import project.spring.repository.NotificacaoPagamentoRepository;
+
 import project.spring.repository.UsuarioRepository;
 import project.spring.services.kafka.producer.PagamentoCreditoProducer;
 
@@ -37,27 +34,21 @@ public class PagamentoCreditoService {
 	private UsuarioRepository repository;
 	
 	@Autowired
-	private NotificacaoPagamentoRepository notificacaoPagamentoRepository;
+	private UsuarioServices usuarioService;
 	
 	
 	public NotificacaoResponse signature(CartaoCreditoRequest cartaoRequest, TitularCartaoCreditoRequest titularCartaoRequest, JwtAuthenticationToken token) throws InterruptedException {
 		var usuario = repository.findById(UUID.fromString(token.getName())).get();
-		UsuarioPagamentoRequest usuarioRequest = new UsuarioPagamentoRequest(usuario.getId().toString(), null, null);
 		
-		if(usuario.isPrimeiraCobranca()) {
-			 usuarioRequest = new UsuarioPagamentoRequest(usuario.getId().toString(), usuario.getCpf_cnpj(), usuario.getNome());
-			 usuario.setPrimeiraCobranca(false);
-			 repository.saveAndFlush(usuario);
-		}
-		
-		NotificacaoPagamento notPagamento = NotificacaoPagamento.newNotificacao();
-		notificacaoPagamentoRepository.save(notPagamento);
-		
-		PagamentoRequest request = new PagamentoRequest(cartaoRequest, titularCartaoRequest, assinaturaValor, usuarioRequest, new IdentificadorApiPrincipalRequest(notPagamento.getId()) );
+		var usuarioRequest = usuarioService.verificaPrimeiraCobranca(usuario);
+
+		Long identificadorApi = notificacaoService.createNotificacao();
+
+		PagamentoRequest request = new PagamentoRequest(cartaoRequest, titularCartaoRequest, assinaturaValor, usuarioRequest, identificadorApi);
 	
 		producer.enviarMensagem(request.toAvro());
 
-		return notificacaoService.getNotificacao(notPagamento.getId(), usuario);
+		return notificacaoService.getNotificacao(identificadorApi, usuario);
 		
 	}
 	

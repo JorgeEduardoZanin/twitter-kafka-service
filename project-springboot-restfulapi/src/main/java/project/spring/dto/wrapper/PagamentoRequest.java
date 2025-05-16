@@ -9,13 +9,12 @@ import org.apache.avro.LogicalTypes;
 import org.apache.avro.Schema;
 
 import project.spring.dto.request.CartaoCreditoRequest;
-import project.spring.dto.request.IdentificadorApiPrincipalRequest;
 import project.spring.dto.request.TitularCartaoCreditoRequest;
 import project.spring.dto.request.UsuarioPagamentoRequest;
 
 
 public record PagamentoRequest(CartaoCreditoRequest cartao, TitularCartaoCreditoRequest titular, BigDecimal value,
-		UsuarioPagamentoRequest usuario, IdentificadorApiPrincipalRequest identificadorApiPrincipal){
+		UsuarioPagamentoRequest usuario, Long identificadorApiPrincipal){
 	
 	public project.spring.avro.PagamentoRequest toAvro(){
 		
@@ -31,7 +30,7 @@ public record PagamentoRequest(CartaoCreditoRequest cartao, TitularCartaoCredito
 	    
 	    project.spring.avro.IdentificadorApiPrincipalRequest identificadorApi = 
 	    		project.spring.avro.IdentificadorApiPrincipalRequest.newBuilder()
-	    		.setIdentificadorApiPrincipal(this.identificadorApiPrincipal.identificadorApiPrincipal())
+	    		.setIdentificadorApiPrincipal(this.identificadorApiPrincipal())
 	    		.build();
 
 	   

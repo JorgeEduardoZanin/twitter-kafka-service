@@ -1,4 +1,4 @@
-package project.spring.services.kafka;
+package project.spring.services.kafka.consumer;
 
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ import project.spring.dto.request.PagamentoCreditoRequest;
 import project.spring.dto.request.TitularCartaoCreditoRequest;
 import project.spring.dto.request.UsuarioPagamentoRequest;
 import project.spring.dto.wrapper.PagamentoCreditoWrapperRequest;
-import project.spring.services.PagamentoService;
+import project.spring.services.PagamentoCreditoService;
 import project.spring.util.DecimalUtils;
 
 
@@ -26,7 +26,7 @@ public class PagamentoCreditoConsumer{
 	private static final Logger LOGGER = LoggerFactory.getLogger(PagamentoCreditoConsumer.class);
 	
 	@Autowired
-	private PagamentoService service;
+	private PagamentoCreditoService service;
 
     
 	

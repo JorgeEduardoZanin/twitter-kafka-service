@@ -11,7 +11,7 @@ import project.spring.dto.response.LoginResponse;
 import project.spring.services.TokenService;
 
 @RestController
-public class TokenResources {
+public class TokenResource {
 	
 	@Autowired
 	private TokenService service;

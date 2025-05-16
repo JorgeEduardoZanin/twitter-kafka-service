@@ -26,7 +26,13 @@ public class NotificacaoService {
 	@Autowired
 	private ProcessamentoRespostaNotificacao processaNotificacao;
 	
-	public void createNotificacao(NotificacaoPagamento notificacao) {
+	public Long createNotificacao() {
+		project.spring.entities.NotificacaoPagamento notificacao = project.spring.entities.NotificacaoPagamento.newNotificacao();
+		repository.saveAndFlush(notificacao);
+		return notificacao.getId();
+	}
+	
+	public void updateNotificacao(NotificacaoPagamento notificacao) {
 		
 		var usuario = usuarioRepository.findById(UUID.fromString(notificacao.getUsuarioId().toString()));
 	

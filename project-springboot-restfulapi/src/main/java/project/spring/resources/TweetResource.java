@@ -23,7 +23,7 @@ import project.spring.services.TweetServices;
 
 @RestController
 @RequestMapping(value = "/tweet")
-public class TweetResources {
+public class TweetResource {
 
 	@Autowired
 	private TweetServices services;

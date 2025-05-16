@@ -28,7 +28,7 @@ public class NotificacaoPagamentoConsumer{
 	public void pagamentoCreditoConsumer(NotificacaoPagamento notificacao, Acknowledgment ack) throws IOException {
 		LOGGER.info("Consumindo mensagem {}",  notificacao);
 		
-		service.createNotificacao(notificacao);
+		service.updateNotificacao(notificacao);
 			
 		ack.acknowledge();
 	}

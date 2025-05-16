@@ -220,7 +220,7 @@ public class Usuario implements UserDetails {
 	}
 	
 	public void usuarioAssinatura(StatusPagamento status, LocalDate dataExpiracaoAssinatura) {
-		if (status != StatusPagamento.CONFIRMED) {
+		if (status != StatusPagamento.CONFIRMED && status != StatusPagamento.RECEIVED) {
             return;
         }
         if (dataExpiracaoAssinatura == null || dataExpiracaoAssinatura.isBefore(LocalDate.now())) {

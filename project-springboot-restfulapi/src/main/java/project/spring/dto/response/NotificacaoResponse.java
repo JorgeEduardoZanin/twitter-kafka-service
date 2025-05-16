@@ -19,13 +19,11 @@ public record NotificacaoResponse(Long id, UUID usuarioId, StatusPagamento statu
 	}
 	
 	public static NotificacaoPagamento toEntity(project.spring.avro.NotificacaoPagamento notificacao, Usuario usuario) {
-		
-		
-		
+
 		return new NotificacaoPagamento(notificacao.getId(),
 				notificacao.getPaymentId().toString(),
 				StatusPagamento.valueOf(notificacao.getStatus().toString()),
-				notificacao.getDataExpiracaoAssinatura()==null ? LocalDate.parse(notificacao.getDataExpiracaoAssinatura()):null,
+				notificacao.getDataExpiracaoAssinatura()!=null ? LocalDate.parse(notificacao.getDataExpiracaoAssinatura()):null,
 				notificacao.getChavePix() != null ? notificacao.getChavePix().toString() : "",
 				notificacao.getBillingType().toString(),
 				LocalDate.parse(notificacao.getDataExpiracaoPagamento()), 

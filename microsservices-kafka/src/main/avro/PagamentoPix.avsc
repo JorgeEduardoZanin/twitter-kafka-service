@@ -1,0 +1,38 @@
+{
+  "namespace": "project.spring.avro",
+  "type": "record",
+  "name": "PagamentoPixRequest",
+  "fields": [
+      {
+      "name": "identificadorApiPrincipal",
+      "type": {
+        "type": "record",
+        "name": "IdentificadorApiPrincipalRequest",
+        "fields": [
+          { "name": "identificadorApiPrincipal", "type": "long" }   
+        ]
+      }
+    },
+    {
+      "name": "value",
+      "type": {
+        "type": "bytes",
+        "logicalType": "decimal",
+        "precision": 10,
+        "scale": 2
+      }
+    },
+    {
+      "name": "usuario",
+      "type": {
+        "type": "record",
+        "name": "UsuarioPagamentoRequest",
+        "fields": [
+          { "name": "id",        "type": "string" },
+          { "name": "nome",      "type": ["null","string"], "default":null },
+          { "name": "cpf_cnpj",  "type": ["null","string"], "default":null }
+        ]
+      }
+    }
+  ]
+}

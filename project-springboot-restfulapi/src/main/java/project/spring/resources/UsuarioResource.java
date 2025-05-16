@@ -23,7 +23,7 @@ import project.spring.services.UsuarioServices;
 
 @RestController
 @RequestMapping(value = "/usuario")
-public class UsuarioResources {
+public class UsuarioResource {
 
 	@Autowired
 	private UsuarioServices services;

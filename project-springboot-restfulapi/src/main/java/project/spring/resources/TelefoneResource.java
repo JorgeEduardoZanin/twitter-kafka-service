@@ -20,7 +20,7 @@ import project.spring.services.TelefoneServices;
 
 @RestController
 @RequestMapping(value = "/usuario/telefone")
-public class TelefoneResources {
+public class TelefoneResource {
 
 	@Autowired
 	private TelefoneServices services;
